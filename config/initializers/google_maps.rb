@@ -1,0 +1,1 @@
+GOOGLE_MAPS_CONFIG = {"api_key" => ENV['GOOGLE_API_KEY']}

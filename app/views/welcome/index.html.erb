@@ -1,0 +1,10 @@
+<%= form_for(@location) do |f| %>
+  <%= f.label "Where did you go?" %>
+  <%= f.text_field :name, placeholder: "e.g. Central Park" %>
+
+  <%= f.submit "Add Location" %>
+<% end %>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>

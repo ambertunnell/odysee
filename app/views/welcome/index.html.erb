@@ -1,10 +1,21 @@
-<%= form_for(@location) do |f| %>
-  <%= f.label "Where did you go?" %>
-  <%= f.text_field :name, placeholder: "e.g. Central Park" %>
+<h1> Mapify </h1>
 
-  <%= f.submit "Add Location" %>
+<%= form_tag("/locations", method:"POST") do %>
+  <%= label_tag(:query, "Where did you go?") %>
+  <%= text_field_tag(:query, "e.g. Central Park") %>
+
+  <%= submit_tag("Add Location") %>
 <% end %>
 
+
 <div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+  <div id="custom_style" style='width: 800px; height: 600px;'></div>
 </div>
+
+
+<%= javascript_tag do %>
+  window.hash = JSON.parse("<%=j @hash.to_json %>");
+
+  alert(window.hash);
+
+<% end %>

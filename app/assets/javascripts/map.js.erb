@@ -1,37 +1,5 @@
 $(function(){ 
 
-var mapStyle = [
-  //http://snazzymaps.com/
-  {"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-77}]},{"featureType":"road"}
-];
-
-handler = Gmaps.build('Google');
-handler.buildMap({
-    internal: {id: 'custom_style'},
-    provider: {
-      zoom:      5,
-      center:    new google.maps.LatLng(40.385873, -1.471471),
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles:    mapStyle
-    }
-  },
-  function(){
-    markers = handler.addMarkers([
-      {
-        "lat": 40.705718, 
-        "lng": -74.014362,
-        "picture": {
-          "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
-          "width":  0,
-          "height": 0
-        },
-        "infowindow": "hello!"
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  }
-);
-
 
 });
+

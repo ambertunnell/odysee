@@ -1,6 +1,9 @@
 class LocationsController < ApplicationController
 
   def index
+    @location = Location.new
+    @locations = Location.all
+
   end
 
   def create
@@ -14,13 +17,7 @@ class LocationsController < ApplicationController
     @location = Location.new(:latitude => lat, :longitude => lng)
 
     if @location.save
-
-      @hash = Gmaps4rails.build_markers(@location) do |location, marker|
-        marker.lat location.latitude
-        marker.lng location.longitude
-      end.first
-
-      render 'welcome/index'
+      redirect_to root_url
     end   
 
   end

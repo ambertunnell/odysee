@@ -9,8 +9,8 @@ handler = Gmaps.build('Google');
 handler.buildMap({
     internal: {id: 'custom_style'},
     provider: {
-      zoom:      0,
-      center:    new google.maps.LatLng(53.385873, -1.471471),
+      zoom:      5,
+      center:    new google.maps.LatLng(40.385873, -1.471471),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles:    mapStyle
     }
@@ -18,8 +18,8 @@ handler.buildMap({
   function(){
     markers = handler.addMarkers([
       {
-        "lat": 0,
-        "lng": 0,
+        "lat": 40.705718, 
+        "lng": -74.014362,
         "picture": {
           "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
           "width":  0,
@@ -32,5 +32,6 @@ handler.buildMap({
     handler.fitMapToBounds();
   }
 );
+
 
 });

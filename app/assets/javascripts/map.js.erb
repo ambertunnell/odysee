@@ -1,37 +1,147 @@
-$(function(){ 
+  $(function () {
 
-var mapStyle = [
-  //http://snazzymaps.com/
-  {"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"poi","stylers":[{"visibility":"simplified"}]},{"featureType":"road","stylers":[{"visibility":"simplified"}]},{"featureType":"water","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"visibility":"off"}]},{"featureType":"road.local","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","stylers":[{"color":"#84afa3"},{"lightness":52}]},{"stylers":[{"saturation":-77}]},{"featureType":"road"}
-];
+      var map;
+      var directionsDisplay;
+      var directionsService = new google.maps.DirectionsService();
 
-handler = Gmaps.build('Google');
-handler.buildMap({
-    internal: {id: 'custom_style'},
-    provider: {
-      zoom:      5,
-      center:    new google.maps.LatLng(40.385873, -1.471471),
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles:    mapStyle
-    }
-  },
-  function(){
-    markers = handler.addMarkers([
-      {
-        "lat": 40.705718, 
-        "lng": -74.014362,
-        "picture": {
-          "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
-          "width":  0,
-          "height": 0
-        },
-        "infowindow": "hello!"
+      function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+          var mapOptions = {
+              center: new google.maps.LatLng(40.783027, -73.965387),
+              zoom: 13,
+              //http://snazzymaps.com/
+              styles: [{
+                  "featureType": "administrative",
+                      "stylers": [{
+                      "visibility": "off"
+                  }]
+              }, {
+                  "featureType": "poi",
+                      "stylers": [{
+                      "visibility": "simplified"
+                  }]
+              }, {
+                  "featureType": "road",
+                      "stylers": [{
+                      "visibility": "simplified"
+                  }]
+              }, {
+                  "featureType": "water",
+                      "stylers": [{
+                      "visibility": "simplified"
+                  }]
+              }, {
+                  "featureType": "transit",
+                      "stylers": [{
+                      "visibility": "simplified"
+                  }]
+              }, {
+                  "featureType": "landscape",
+                      "stylers": [{
+                      "visibility": "simplified"
+                  }]
+              }, {
+                  "featureType": "road.highway",
+                      "stylers": [{
+                      "visibility": "off"
+                  }]
+              }, {
+                  "featureType": "road.local",
+                      "stylers": [{
+                      "visibility": "on"
+                  }]
+              }, {
+                  "featureType": "road.highway",
+                      "elementType": "geometry",
+                      "stylers": [{
+                      "visibility": "on"
+                  }]
+              }, {
+                  "featureType": "water",
+                      "stylers": [{
+                      "color": "#84afa3"
+                  }, {
+                      "lightness": 52
+                  }]
+              }, {
+                  "stylers": [{
+                      "saturation": -77
+                  }]
+              }, {
+                  "featureType": "road"
+              }]
+          };
+          map = new google.maps.Map(document.getElementById("map-canvas"),
+          mapOptions);
+          directionsDisplay.setMap(map);
+
+          //initial marker 
+          // var marker = new google.maps.Marker({
+          //     position: myLatlng,
+          //     map: map,
+          //     draggable: true,
+          //     title: "Hello!"
+          // });
+
+
       }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  }
-);
+      google.maps.event.addDomListener(window, 'load', initialize);
 
 
-});
+      $(".add_location").submit(function (e) {
+          e.preventDefault();
+
+          var query = $("#query").val();
+
+          var request = {
+              query: query
+          };
+
+          service = new google.maps.places.PlacesService(map);
+          result = service.textSearch(request, callback);
+
+          function callback(results, status) {
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                  for (var i = 0; i < results.length; i++) {
+                      var place = results[i];
+                      createMarker(results[0]);
+                  }
+              }
+          }
+
+          function createMarker(place) {
+              var placeLoc = place.geometry.location;
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: place.geometry.location
+              });
+          }
+      });
+
+    function calcRoute() {
+      var start = new google.maps.LatLng(40.783027, -73.965387);
+      var end = new google.maps.LatLng(40.783027, -73.96);
+      var waypts = [{location: new google.maps.LatLng(40.783027, -73.8), stopover: true}];
+
+      var request = {
+          origin: start,
+          destination: end,
+          waypoints: waypts,
+          optimizeWaypoints: true,
+          travelMode: google.maps.TravelMode.DRIVING
+      };
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          var route = response.routes[0];
+        }
+      });
+    }
+
+
+    $(".animate").click(function(e){
+        e.preventDefault();
+        calcRoute();
+    });
+
+});    

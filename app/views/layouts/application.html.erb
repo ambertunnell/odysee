@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapify</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= analytics_init if Rails.env.production? %>
+</head>
+<body>
+
+<%= yield %>
+
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyAQYcSOCBKVx1L_UaJvnLSUs4oxDqkOeUk" %>
+  <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?libraries=places" %>
+  <%= javascript_include_tag 'application' %>
+</body>
+</html>

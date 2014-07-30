@@ -1,87 +1,10 @@
 <h1> Mapify </h1>
 
-<%= form_tag("/locations", method:"POST") do %>
-  <%= label_tag(:query, "Where did you go?") %>
-  <%= text_field_tag(:query, "e.g. Central Park") %>
-  <%= submit_tag("Add Location") %>
-<% end %>
+  <%= form_tag("/locations", method:"POST", :class => "add_location") do %>
+    <%= label_tag(:query, "Where did you go?") %>
+    <%= text_field_tag(:query, "e.g. Central Park") %>
+    <%= submit_tag("Add Location") %>
+  <% end %>
 
-
-<div style='width: 800px;'>
-  <div id="custom_style" style='width: 800px; height: 600px;'></div>
-</div>
-
-<%= javascript_tag do%>
- window.locations= <%=raw @locations.to_json %>;
-<%end%>
-
-<script type="text/javascript">
-
-
-function initialize() {
-    var map;
-    var bounds = new google.maps.LatLngBounds();
-    var mapOptions = {
-        mapTypeId: 'roadmap'
-    };
-
-    // Display a map on the page
-    map = new google.maps.Map(document.getElementById("custom_style"), mapOptions);
-    map.setTilt(45);
-
-
-var markers=[];
-var infoWindowContent=[];
- $.each(locations, function(index) {
-
-
-console.log( data[0][index].latitude,data[0][index].longitude );
-markers.push([locations[index]['latitude'],locations[index]['longitude']]);
-infoWindowContent.push(['<div class="info_content" >' +
-        '<h3 style="color: rgb(<%= rand(0..200)%>,<%= rand(0..200)%> ,<%= rand(0..200)%>);">'+locations[index]['title']+'</h3>' +'</br>'+
-        '<p>'+locations[index]['about']+'</p>' +       
-         '</div>']);
-
-
-
- });
-
-
-
-    // Display multiple markers on a map
-    var infoWindow = new google.maps.InfoWindow(), marker, i;
-
-    // Loop through our array of markers & place each one on the map  
-    for( i = 0; i < markers.length; i++ ) {
-        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: markers[i][0]
-        });
-
-        // Allow each marker to have an info window    
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(infoWindowContent[i][0]);
-                infoWindow.open(map, marker);
-
-
-            }
-        })(marker, i));
-
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-
-    }
-
-    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(14);
-        google.maps.event.removeListener(boundsListener);
-    });
-
-}//initialize ends
-
-</script>
+<button class="animate">Draw route</button>
+<div id="map-canvas" style="width: 70%; height: 100%"/>

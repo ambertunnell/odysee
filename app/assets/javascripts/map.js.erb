@@ -1,5 +1,4 @@
-
-  $(function () {
+$(function () {
 
       var map;
       var directionsDisplay;
@@ -10,6 +9,7 @@
           var mapOptions = {
               center: new google.maps.LatLng(40.783027, -73.965387),
               zoom: 13,
+              icon: "images/icon_15779.png",
               //http://snazzymaps.com/
               styles: [{
                   "featureType": "administrative",
@@ -92,10 +92,10 @@
       $(".add_location").submit(function (e) {
           e.preventDefault();
 
-          var query = $("#query").val();
+          var name = $("#location_name").val();
 
           var request = {
-              query: query
+              query: name
           };
 
           service = new google.maps.places.PlacesService(map);
@@ -128,7 +128,7 @@
           origin: start,
           destination: end,
           waypoints: waypts,
-          optimizeWaypoints: true,
+          optimizeWaypoints: false,
           travelMode: google.maps.TravelMode.DRIVING
       };
       directionsService.route(request, function(response, status) {

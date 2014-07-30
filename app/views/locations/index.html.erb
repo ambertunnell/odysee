@@ -1,9 +1,12 @@
 <h1> Mapify </h1>
 
-  <%= form_tag("/locations", method:"POST", :class => "add_location") do %>
-    <%= label_tag(:query, "Where did you go?") %>
-    <%= text_field_tag(:query, "e.g. Central Park") %>
-    <%= submit_tag("Add Location") %>
+  <%= form_for @location, :html => {class: "add_location"} do |f| %>
+  <%#= form_tag("/locations", method:"POST", :class => "add_location") do %>
+
+    <%= f.collection_select :day_id, @days, :id, :date %>
+    <%= f.label :name, "Where did you go?" %>
+    <%= f.text_field :name, :placeholder => "e.g. Central Park", :autocomplete => "on" %>
+    <%= f.submit "Add Location" %>
   <% end %>
 
 <button class="animate">Draw route</button>

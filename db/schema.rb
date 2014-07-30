@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20140730212001) do
 
   create_table "days", force: true do |t|
-    t.datetime "date"
+    t.string   "date"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

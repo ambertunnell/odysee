@@ -7,7 +7,6 @@
     <%= f.text_field :date, :placeholder => "7/23/2014" %>
     <%= f.submit "Add Date" %>
   <% end %>
-  <button class="delete_day">Delete Day</button>
 
 
   <%= form_for @location, :html => {class: "add_location"} do |f| %>
@@ -18,6 +17,8 @@
   <% end %>
 
   <button class="animate">Draw route</button>
+  <button class="delete_day">Delete Day</button>
+
   <div id="map-canvas" style="width: 70%; height: 100%"/>
 <!-- NOT LOGGED IN -->
 <% else %>

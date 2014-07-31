@@ -3,7 +3,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.find_by(id: session[:user_id])
+    # @user = User.find_by(id: session[:user_id])
+    @user = User.find_or_initialize_by(user_params)
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to '/'
+    else
+       redirect_to '/', :notice => "Please Try to Log in Again!"
+    end
   end
 
   def destroy
@@ -14,10 +21,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @location = Location.new
-    @locations = Location.all
     @day = Day.new
-    @days = Day.all 
+    @location = Location.new 
+    if session[:user_id]
+      @user = User.find(session[:user_id]) 
+      @locations = @user.locations
+      @days = @user.days
+    end
   end
-  
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :uid)
+    end
 end

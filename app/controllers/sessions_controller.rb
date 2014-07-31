@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_provider_and_uid(auth_hash[:provider], auth_hash[:id]) || User.create_from_omniauth(auth_hash)
     if @user
-         session[:user_id] = @user.id
-         redirect_to root_url
+      session[:user_id] = @user.id
+      redirect_to root_url
     else
-         redirect_to root_url
+      redirect_to root_url
     end
   end
 
@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
   end
 
   protected
+
     def auth_hash
       request.env['omniauth.auth']
     end

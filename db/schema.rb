@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730212001) do
+ActiveRecord::Schema.define(version: 20140731175059) do
 
   create_table "days", force: true do |t|
     t.string   "date"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20140730212001) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end

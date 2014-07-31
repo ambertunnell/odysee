@@ -38,6 +38,9 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'figaro'
 
 group :test, :development do
   gem "rspec-rails"

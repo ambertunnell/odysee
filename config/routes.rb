@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   
   resources :locations, :only => [:index, :create]
   resources :days, :only => [:create, :show] 
+  resources :users
 
   # You can have the root of your site routed with "root"
   root 'locations#index'
+
+  get '/login' => 'sessions#new'
+  get '/auth/facebook/callback' => 'sessions#create'
+  # get '/auth/facebook' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

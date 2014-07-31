@@ -5,7 +5,6 @@ class LocationsController < ApplicationController
     @locations = Location.all
     @day = Day.new
     @days = Day.all 
-
   end
 
   def create
@@ -14,7 +13,6 @@ class LocationsController < ApplicationController
     if @location.save
       redirect_to root_url
     end   
-
   end
 
   private

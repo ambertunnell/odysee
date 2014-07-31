@@ -1,0 +1,16 @@
+$(function () {
+/////////////// Add a date ///////////////////
+    $("#new_day").submit(function(e){
+        e.preventDefault();
+  
+      $.ajax({
+        type: "POST",
+        url: "/days",
+        data: {day: {date: $("#day_date").val()}},
+        success: function(response){
+          $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>")
+        }
+      })
+    });
+ });
+    

@@ -84,12 +84,41 @@ $(function () {
           //     title: "Hello!"
           // });
 
+        google.maps.event.addListener(map, 'click', function(event) {
+          
+          var latitude = event.latLng.B;
+          var longitude = event.latLng.k;
+          var day_id = $('#location_day_id').val();
+
+           $.ajax({
+                      type: "POST",
+                      url: "/locations",
+                      data: {location: 
+                              {
+                               name: "undefined", 
+                               latitude: latitude,
+                               longitude: longitude,
+                               day_id: day_id
+                              }
+                            },
+                      success: function(){
+                          placeMarker(event.latLng);
+                      }      
+                    })
+          
+        });
 
       }
       google.maps.event.addDomListener(window, 'load', initialize);
 
+function placeMarker(location) {
+  var marker = new google.maps.Marker({
+      position: location,
+      map: map
+  });
+}
 
-/////////// Add a location /////////////
+/////////// Add a location manually /////////////
       $(".add_location").submit(function (e) {
           e.preventDefault();
 
@@ -127,8 +156,6 @@ $(function () {
                           createMarker(results[0]);
                       }      
                     })
-
-                    
                   }
               }
           }
@@ -145,6 +172,10 @@ $(function () {
 
 ///////////// Add a route /////////////////
     function calcRoute() {
+
+      // var start = locations.first;
+      // var end = locations.last;
+
       var start = new google.maps.LatLng(40.783027, -73.965387);
       var end = new google.maps.LatLng(40.783027, -73.96);
       var waypts = [{location: new google.maps.LatLng(40.783027, -73.8), stopover: true}];
@@ -153,7 +184,7 @@ $(function () {
           origin: start,
           destination: end,
           waypoints: waypts,
-          optimizeWaypoints: false    ,
+          optimizeWaypoints: false,
           travelMode: google.maps.TravelMode.DRIVING
       };
       directionsService.route(request, function(response, status) {
@@ -166,22 +197,9 @@ $(function () {
 
     $(".animate").click(function(e){
         e.preventDefault();
+        var day_id = $('#location_day_id').val();
+
         calcRoute();
     });
 
-/////////////// Add a date ///////////////////
-    $("#new_day").submit(function(e){
-        e.preventDefault();
-  
-      $.ajax({
-        type: "POST",
-        url: "/days",
-        data: {day: {date: $("#day_date").val()}},
-        success: function(response){
-          $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>")
-        }
-      })
-
-    });
-
-});    
+});

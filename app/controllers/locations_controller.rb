@@ -3,6 +3,7 @@ class LocationsController < ApplicationController
   def index
     @location = Location.new
     @locations = Location.all
+    @day = Day.new
     @days = Day.all 
 
   end

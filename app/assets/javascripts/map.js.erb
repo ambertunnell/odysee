@@ -99,7 +99,7 @@ $(function () {
           };
 
           service = new google.maps.places.PlacesService(map);
-          result = service.textSearch(request, callback);
+          service.textSearch(request, callback);
 
           function callback(results, status) {
               if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -119,6 +119,7 @@ $(function () {
           }
       });
 
+///////////// Add a route /////////////////
     function calcRoute() {
       var start = new google.maps.LatLng(40.783027, -73.965387);
       var end = new google.maps.LatLng(40.783027, -73.96);
@@ -128,7 +129,7 @@ $(function () {
           origin: start,
           destination: end,
           waypoints: waypts,
-          optimizeWaypoints: false,
+          optimizeWaypoints: false    ,
           travelMode: google.maps.TravelMode.DRIVING
       };
       directionsService.route(request, function(response, status) {
@@ -139,10 +140,25 @@ $(function () {
       });
     }
 
-
     $(".animate").click(function(e){
         e.preventDefault();
         calcRoute();
+    });
+
+/////////////// Add a date ///////////////////
+    $(".add_date").click(function(e){
+        e.preventDefault();
+  
+      $.ajax({
+        url: "/days",
+        dataType: "json",
+        type: "POST",
+        data: {day: {date: $("#day_date").val()}},
+        success: function(response){
+          console.log(response);
+        }
+      })
+
     });
 
 });    

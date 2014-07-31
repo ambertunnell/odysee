@@ -5,17 +5,9 @@ $(function () {
   var directionsDisplay;
   var directionsService = new google.maps.DirectionsService();
   var day_locations;
-
   var id = $("#location_day_id").val();
 
-  $.ajax({
-    type: "GET",
-    url: "/days/show",
-    data: {day: {id: id}},
-    success: function(response){
-      addDayLocations(response);
-    }
-  });
+  requestDayLocations();
 
 
   function initialize() {
@@ -100,6 +92,7 @@ $(function () {
           var longitude = event.latLng.B;
           var day_id = $('#location_day_id').val();
 
+          
           $.ajax({
               type: "POST",
               url: "/locations",
@@ -113,6 +106,7 @@ $(function () {
               },
               success: function () {
                   placeMarker(event.latLng);
+                  requestDayLocations(); 
               }
           });
       });
@@ -192,6 +186,7 @@ $(function () {
                   },
                   success: function () {
                       createMarker(results[0]);
+                      requestDayLocations();//causes reappearing of all markers
                   }
               });
           }
@@ -206,14 +201,12 @@ $(function () {
           markers.push(marker);
       }
 
-      //clear form  
       $("#location_name").val("");
 
   });
 
   ///////////// Add a route /////////////////
   function calcRoute() {
-
       var start = new google.maps.LatLng(day_locations[0][0], day_locations[0][1]);
       var end = new google.maps.LatLng(day_locations[day_locations.length - 1][0], day_locations[day_locations.length - 1][1]);
       var waypts = [];
@@ -243,37 +236,21 @@ $(function () {
   $(".animate").click(function (e) {
       e.preventDefault();
 
-      removeMarkers();
-
-      // var day_id = $('#location_day_id').val();
-
+      removeMarkers(); //not removing markers added manually?
       calcRoute();
   });
 
   /////////// Change day //////////////////
 
 
-  $("#location_day_id").change(function () {
-      directionsDisplay.setDirections({routes: []});
+  $("#location_day_id").change(function() {
+      directionsDisplay.setDirections({routes: []}); //keep!
       removeMarkers();
 
-      var id = $("#location_day_id").val();
-
-      $.ajax({
-          type: "GET",
-          url: "/days/show",
-          data: {
-              day: {
-                  id: id
-              }
-          },
-          success: function (response) {
-              addDayLocations(response);
-          }
-      });
-
+      requestDayLocations();
   });
 
+  ////// GET locations from current selected day //////
 
   function removeMarkers() {
       for (i = 0; i < markers.length; i++) {
@@ -281,15 +258,27 @@ $(function () {
       }
   }
 
+  function requestDayLocations(){
+    var id = $("#location_day_id").val();
+
+    $.ajax({
+        type: "GET",
+        url: "/days/show",
+        data: { day: { id: id } },
+        success: function (response) {
+            addDayLocations(response);
+        }
+    });
+  }
+
   function addDayLocations(locations) {
-      day_locations = [];
+      day_locations = []; //this is not ruby. camelcase
       for (var i = 0; i < locations.length; i++) {
           var latitude = locations[i].latitude;
           var longitude = locations[i].longitude;
           day_locations.push([latitude, longitude]);
           placeMarker(new google.maps.LatLng(latitude, longitude));
       }
-
   }
 
 

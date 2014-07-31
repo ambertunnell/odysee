@@ -1,6 +1,7 @@
 class DaysController < ApplicationController
 
   def create
+    @user = User.find(session[:user_id]) if session[:user_id]
     @day = Day.new(day_params)
     respond_to do |format|
       if @day.save
@@ -14,6 +15,7 @@ class DaysController < ApplicationController
   end 
 
   def show
+    @user = User.find(session[:user_id]) if session[:user_id]
     @locations = Day.find(params[:day][:id]).locations
     render json: @locations
   end

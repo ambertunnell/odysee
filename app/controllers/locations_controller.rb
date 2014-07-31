@@ -1,13 +1,6 @@
 class LocationsController < ApplicationController
 
   def index
-    @location = Location.new
-    @locations = Location.all
-    @day = Day.new
-    @days = Day.all 
-    
-    # @day_locations = Day.first.locations
-    # render json: @day_locations
   end
 
   def create

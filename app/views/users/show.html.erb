@@ -1,0 +1,27 @@
+<% if logged_in? %>
+  Welcome, <strong><%= current_user.name %></strong>!
+  <%= link_to 'Log Out', logout_path %>
+  <h1> Mapify </h1>
+  <%= form_for @day, :html => {class: "add_day"} do |f| %>
+    <%= f.label :date, "Add a New Date" %>
+    <%= f.text_field :date, :placeholder => "7/23/2014" %>
+    <%= f.submit "Add Date" %>
+  <% end %>
+
+  <%= form_for @location, :html => {class: "add_location"} do |f| %>
+    <%= f.collection_select :day_id, @days, :id, :date %>
+    <%= f.label :name, "Where did you go?" %>
+    <%= f.text_field :name, :placeholder => "e.g. Central Park" %>
+    <%= f.submit "Add Location" %>
+  <% end %>
+
+  <button class="animate">Draw route</button>
+  <div id="map-canvas" style="width: 70%; height: 100%"/>
+<!-- NOT LOGGED IN -->
+<% else %>
+  <%#= link_to 'Log In with Facebook', login_path %> 
+  <h1>Mapify</h1><br>
+  <div id="user-widget">
+    <a href="/auth/facebook"><img src="http://www.kilnandco.com/gallery/var/albums/facebook-login-button.png?m=1375582078" width="250"></a>
+  </div>
+<% end %>

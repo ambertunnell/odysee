@@ -9,20 +9,18 @@ class LocationsController < ApplicationController
   end
 
   def create
+    @location = Location.new(location_params)
 
-
-    # @location = Location.new(:latitude => lat, :longitude => lng)
-
-    # if @location.save
-    #   redirect_to root_url
-    # end   
+    if @location.save
+      redirect_to root_url
+    end   
 
   end
 
   private
 
   def location_params
-    params.require(:location).permit(:name, :day => [:day_id])
+    params.require(:location).permit(:name, :latitude, :longitude, :day_id)
   end 
 
 end

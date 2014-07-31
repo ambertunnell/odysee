@@ -4,10 +4,10 @@ class DaysController < ApplicationController
     @day = Day.new(day_params)
     respond_to do |format|
       if @day.save
-        format.html { redirect_to root_url, notice: 'Day was successfully created.' }
+        # format.html { redirect_to root_url, notice: 'Day was successfully created.' }
         format.json { render json: @day}
       else
-        format.html { render action: 'new' }
+        # format.html { redirect_to root_url, notice: 'Day could not be created.' }
         format.json { render json: @day.errors, status: :unprocessable_entity }
       end
     end

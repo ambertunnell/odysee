@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :locations
-  resources :days 
+  
+  resources :locations, :only => [:index, :create]
+  resources :days, :only => [:create] 
+
   # You can have the root of your site routed with "root"
   root 'locations#index'
 

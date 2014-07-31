@@ -280,6 +280,17 @@ $(function () {
           placeMarker(new google.maps.LatLng(latitude, longitude));
       }
   }
+  /////////Delete all markers///////
+  $(".delete_day").click(function (e) {
+    e.preventDefault();
+    function setAllMap(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+    setAllMap(null);
+    markers = [];
+  });
 
 
 });

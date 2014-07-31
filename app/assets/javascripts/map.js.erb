@@ -10,7 +10,7 @@ $(function () {
               center: new google.maps.LatLng(40.783027, -73.965387),
               zoom: 13,
               icon: "images/icon_15779.png",
-              //http://snazzymaps.com/
+              //Theme from http://snazzymaps.com/
               styles: [{
                   "featureType": "administrative",
                       "stylers": [{
@@ -122,10 +122,13 @@ $(function () {
                                longitude: longitude,
                                day_id: day_id
                               }
-                            }
+                            },
+                      success: function(){
+                          createMarker(results[0]);
+                      }      
                     })
 
-                      createMarker(results[0]);
+                    
                   }
               }
           }
@@ -137,8 +140,6 @@ $(function () {
                   position: place.geometry.location
               });
           }
-
-   
 
       });
 

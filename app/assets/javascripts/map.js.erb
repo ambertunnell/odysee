@@ -1,201 +1,263 @@
 $(function () {
 
-      var map;
-      var directionsDisplay;
-      var directionsService = new google.maps.DirectionsService();
+    var map;
+    var markers = [];
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
 
-      function initialize() {
+    function initialize() {
         directionsDisplay = new google.maps.DirectionsRenderer();
-          var mapOptions = {
-              center: new google.maps.LatLng(40.783027, -73.965387),
-              zoom: 13,
-              icon: "images/icon_15779.png",
-              //Theme from http://snazzymaps.com/
-              styles: [{
-                  "featureType": "administrative",
-                      "stylers": [{
-                      "visibility": "off"
-                  }]
-              }, {
-                  "featureType": "poi",
-                      "stylers": [{
-                      "visibility": "simplified"
-                  }]
-              }, {
-                  "featureType": "road",
-                      "stylers": [{
-                      "visibility": "simplified"
-                  }]
-              }, {
-                  "featureType": "water",
-                      "stylers": [{
-                      "visibility": "simplified"
-                  }]
-              }, {
-                  "featureType": "transit",
-                      "stylers": [{
-                      "visibility": "simplified"
-                  }]
-              }, {
-                  "featureType": "landscape",
-                      "stylers": [{
-                      "visibility": "simplified"
-                  }]
-              }, {
-                  "featureType": "road.highway",
-                      "stylers": [{
-                      "visibility": "off"
-                  }]
-              }, {
-                  "featureType": "road.local",
-                      "stylers": [{
-                      "visibility": "on"
-                  }]
-              }, {
-                  "featureType": "road.highway",
-                      "elementType": "geometry",
-                      "stylers": [{
-                      "visibility": "off"
-                  }]
-              }, {
-                  "featureType": "water",
-                      "stylers": [{
-                      "color": "#84afa3"
-                  }, {
-                      "lightness": 52
-                  }]
-              }, {
-                  "stylers": [{
-                      "saturation": -77
-                  }]
-              }, {
-                  "featureType": "road"
-              }]
-          };
-          map = new google.maps.Map(document.getElementById("map-canvas"),
-          mapOptions);
-          directionsDisplay.setMap(map);
+        var mapOptions = {
+            center: new google.maps.LatLng(40.783027, -73.965387),
+            zoom: 13,
+            icon: "images/icon_15779.png",
+            streetViewControl: false,
+            mapTypeControl: false,
+            //Theme from http://snazzymaps.com/
+            styles: [{
+                "featureType": "administrative",
+                    "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "poi",
+                    "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "road",
+                    "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "water",
+                    "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "transit",
+                    "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "landscape",
+                    "stylers": [{
+                    "visibility": "simplified"
+                }]
+            }, {
+                "featureType": "road.highway",
+                    "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "road.local",
+                    "stylers": [{
+                    "visibility": "on"
+                }]
+            }, {
+                "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [{
+                    "visibility": "off"
+                }]
+            }, {
+                "featureType": "water",
+                    "stylers": [{
+                    "color": "#84afa3"
+                }, {
+                    "lightness": 52
+                }]
+            }, {
+                "stylers": [{
+                    "saturation": -77
+                }]
+            }, {
+                "featureType": "road"
+            }]
+        };
+        map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+        directionsDisplay.setMap(map);
 
-////// event listener for user adding location by clicking on map /////
-        google.maps.event.addListener(map, 'click', function(event) {
-          
-          var latitude = event.latLng.B;
-          var longitude = event.latLng.k;
-          var day_id = $('#location_day_id').val();
+        ////// event listener for user adding location by clicking on map /////
+        google.maps.event.addListener(map, 'click', function (event) {
 
-           $.ajax({
-                      type: "POST",
-                      url: "/locations",
-                      data: {location: 
-                              {
-                               name: "undefined", 
-                               latitude: latitude,
-                               longitude: longitude,
-                               day_id: day_id
-                              }
-                            },
-                      success: function(){
-                          placeMarker(event.latLng);
-                      }      
-                    })
-          
+            var latitude = event.latLng.k;
+            var longitude = event.latLng.B;
+            var day_id = $('#location_day_id').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/locations",
+                data: {
+                    location: {
+                        name: "nothing",
+                        latitude: latitude,
+                        longitude: longitude,
+                        day_id: day_id
+                    }
+                },
+                success: function () {
+                    placeMarker(event.latLng);
+                }
+            });
         });
 
-      } // end initialize
-      google.maps.event.addDomListener(window, 'load', initialize);
+        ////// event listener for removing location by clicking on pin /////
+        // google.maps.event.addListener(marker, "click", function (event) {
 
-function placeMarker(location) {
-  var marker = new google.maps.Marker({
-      position: location,
-      map: map
-  });
-}
+        //     var latitude = event.latLng.k;
+        //     var longitude = event.latLng.B;
+        //     var day_id = $('#location_day_id').val();
 
-/////////// Add a location manually /////////////
-      $(".add_location").submit(function (e) {
-          e.preventDefault();
+        //     alert(latitude);
 
-          var name = $("#location_name").val();
+        //     $.ajax({
+        //         type: "DELETE",
+        //         url: "/locations",
+        //         data: {
+        //             location: {
+        //                 latitude: latitude,
+        //                 longitude: longitude,
+        //                 day_id: day_id
+        //             }
+        //         },
+        //         success: function () {
+        //             marker.setMap(null);
+        //         }
+        //     });
 
-          var request = {
-              query: name
-          };
 
-          service = new google.maps.places.PlacesService(map);
-          service.textSearch(request, callback);
+        // });
 
-          function callback(results, status) {
-              if (status == google.maps.places.PlacesServiceStatus.OK) {
-                  for (var i = 0; i < results.length; i++) {
-                      var place = results[i];
+    } // end initialize
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-                      var name = $("#location_name").val();
-                      var latitude = results[0].geometry.location.B;
-                      var longitude = results[0].geometry.location.k;
-                      var day_id = $('#location_day_id').val();
-                      
-                    $.ajax({
-                      type: "POST",
-                      url: "/locations",
-                      data: {location: 
-                              {
-                               name: name, 
-                               latitude: latitude,
-                               longitude: longitude,
-                               day_id: day_id
-                              }
-                            },
-                      success: function(){
-                          createMarker(results[0]);
-                      }      
-                    })
-                  }
-              }
-          }
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        markers.push(marker);
+    }
 
-          function createMarker(place) {
-              var placeLoc = place.geometry.location;
-              var marker = new google.maps.Marker({
-                  map: map,
-                  position: place.geometry.location
-              });
-          }
+    // function removeMarker() {
+    //     for (i = 0; i < markers.length; i++) {
+    //         markers[i].setMap(null);
+    //     }
+    // }
+
+    /////////// Add a location manually /////////////
+    $(".add_location").submit(function (e) {
+        e.preventDefault();
+
+        var name = $("#location_name").val();
+
+        var request = {
+            query: name
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.textSearch(request, callback);
+
+        function callback(results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                var place = results[0];
+                
+                var name = $("#location_name").val();
+                var latitude = results[0].geometry.location.k;
+                var longitude = results[0].geometry.location.B;
+                var day_id = $('#location_day_id').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/locations",
+                    data: {
+                        location: {
+                            name: name,
+                            latitude: latitude,
+                            longitude: longitude,
+                            day_id: day_id
+                        }
+                    },
+                    success: function () {
+                        createMarker(results[0]);
+                    }
+                });
+            }
+        }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+            markers.push(marker);
+        }
 
         //clear form  
         $("#location_name").val("");
 
-      });
+    });
 
-///////////// Add a route /////////////////
+    ///////////// Add a route /////////////////
     function calcRoute() {
 
-      // var start = locations.first;
-      // var end = locations.last;
+        var start = new google.maps.LatLng(day_locations[0][0], day_locations[0][1]);
+        var end = new google.maps.LatLng(day_locations[day_locations.length - 1][0], day_locations[day_locations.length - 1][1]);
+        var waypts = [];
 
-      var start = new google.maps.LatLng(40.783027, -73.965387);
-      var end = new google.maps.LatLng(40.783027, -73.96);
-      var waypts = [{location: new google.maps.LatLng(40.783027, -73.8), stopover: true}];
-
-      var request = {
-          origin: start,
-          destination: end,
-          waypoints: waypts,
-          optimizeWaypoints: false,
-          travelMode: google.maps.TravelMode.DRIVING
-      };
-      directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-          var route = response.routes[0];
+        for (var i=1; i < day_locations.length-1; i++){
+            waypts.push({location: new google.maps.LatLng(day_locations[i][0], day_locations[i][1]), stopover: true});
         }
-      });
+
+        var request = {
+            origin: start,
+            destination: end,
+            waypoints: waypts,
+            optimizeWaypoints: false,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+            }
+        });
     }
 
-    $(".animate").click(function(e){
+    $(".animate").click(function (e) {
         e.preventDefault();
         var day_id = $('#location_day_id').val();
 
         calcRoute();
     });
- 
+
+ /////////// Change day //////////////////
+ var day_locations;
+
+   $("#location_day_id").change(function(){
+
+      day_locations = [];
+      var id = $("#location_day_id").val();
+     
+      $.ajax({
+        type: "GET",
+        url: "/days/show",
+        data: {day: {id: id}},
+        success: function(response){
+          for (var i=0; i < response.length; i++){
+            var latitude  = response[i].latitude;
+            var longitude = response[i].longitude;
+            day_locations.push([latitude, longitude]);
+          }
+        }
+      });
+
+      console.log(day_locations);
+
+   });  
+
+
 });

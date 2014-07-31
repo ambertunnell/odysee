@@ -13,6 +13,12 @@ class DaysController < ApplicationController
     end
   end 
 
+  def show
+    @locations = Day.find(params[:day][:id]).locations
+    render json: @locations
+  end
+
+
   private
 
   def day_params

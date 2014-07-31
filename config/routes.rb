@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
   resources :locations, :only => [:index, :create]
-  resources :days, :only => [:create] 
+  resources :days, :only => [:create, :show] 
 
   # You can have the root of your site routed with "root"
   root 'locations#index'

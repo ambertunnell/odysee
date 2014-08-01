@@ -1,16 +1,17 @@
 class DaysController < ApplicationController
 
   def create
-    # binding.pry
     @user = User.find(session[:user_id]) if session[:user_id]
-    @day = Day.new(day_params)
-    @user.days << @day
+
+    unless @user.days.find_by(date: params[:day][:date])
+      @day = Day.create(day_params) 
+      @user.days << @day
+    end
+   
     respond_to do |format|
       if @day.save
-        # format.html { redirect_to root_url, notice: 'Day was successfully created.' }
         format.json { render json: @day}
       else
-        # format.html { redirect_to root_url, notice: 'Day could not be created.' }
         format.json { render json: @day.errors, status: :unprocessable_entity }
       end
     end

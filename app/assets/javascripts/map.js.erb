@@ -9,7 +9,6 @@ $(function () {
 
   requestDayLocations();
 
-
   function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
       var mapOptions = {
@@ -122,15 +121,13 @@ $(function () {
       mapOptions);
       directionsDisplay.setMap(map);
 
-
       ////// event listener for user adding location by clicking on map /////
       google.maps.event.addListener(map, 'click', function (event) {
 
           var latitude = event.latLng.k;
           var longitude = event.latLng.B;
           var day_id = $('#location_day_id').val();
-
-          
+  
           $.ajax({
               type: "POST",
               url: "/locations",
@@ -189,7 +186,7 @@ $(function () {
   }
 
 
-  /////////// Add a location manually /////////////
+  /////////// Add a location manually through form /////////////
   $(".add_location").submit(function (e) {
       e.preventDefault();
 
@@ -234,7 +231,8 @@ $(function () {
           var placeLoc = place.geometry.location;
           var marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location
+              position: place.geometry.location,
+              animation: google.maps.Animation.DROP
           });
           markers.push(marker);
       }

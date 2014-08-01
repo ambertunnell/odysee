@@ -10,7 +10,7 @@
 
 
   <%= form_for @location, :html => {class: "add_location"} do |f| %>
-    <%= f.collection_select :day_id, @days, :id, :date %>
+    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "--Pick a Day--"} %>
     <%= f.label :name, "Where did you go?" %>
     <%= f.text_field :name, :placeholder => "e.g. Central Park" %>
     <%= f.submit "Add Location" %>

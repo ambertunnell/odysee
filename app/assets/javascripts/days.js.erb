@@ -1,15 +1,26 @@
 $(function () {
 /////////////// Add a date ///////////////////
     $("#new_day").submit(function(e){
-        e.preventDefault();
-  
+      e.preventDefault();
+      var day_id  = $("#day_date").val();
+     
       $.ajax({
         type: "POST",
         url: "/days",
-        data: {day: {date: $("#day_date").val()}},
+        data: {day: {date: day_id}},
         success: function(response){
-          $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>")
-          $("#day_date").val('')
+          var options = $("option");
+          var unique  = true;
+
+          for (var i = 1; i < options.length; i++){
+            if (options[i] == day_id){ unique = false; }
+          }
+
+          if (unique){
+            $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>");
+          }
+          $("#day_date").val('');
+
         }
       })
     });

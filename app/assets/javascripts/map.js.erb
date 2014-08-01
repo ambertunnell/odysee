@@ -227,10 +227,12 @@ $(function () {
 
       function createMarker(place) {
           var placeLoc = place.geometry.location;
+
           var marker = new google.maps.Marker({
               map: map,
-              position: place.geometry.location,
-              animation: google.maps.Animation.DROP
+              position: place.geometry.location
+              // icon: "map-pin.jpg"
+              // animation: google.maps.Animation.DROP
           });
           markers.push(marker);
       }
@@ -257,7 +259,7 @@ $(function () {
           destination: end,
           waypoints: waypts,
           optimizeWaypoints: false,
-          travelMode: google.maps.TravelMode.DRIVING
+          travelMode: google.maps.TravelMode.WALKING
       };
       directionsService.route(request, function (response, status) {
           if (status == google.maps.DirectionsStatus.OK) {

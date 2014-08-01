@@ -26,7 +26,7 @@ class DaysController < ApplicationController
     # binding.pry
     @day = Day.find(day_params[:date])
     @day.destroy
-    format.json { render json: ""}
+    render json: {}
   end
 
 

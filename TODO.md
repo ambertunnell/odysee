@@ -21,8 +21,11 @@ JACOB:
   hardcode two routes to show at onces
   make draw all routes button
 
-  add marker to db and map
+  **add marker to db and map
   request all locations for day without showing markers
   route them
+
+  NOTE, can only have 3 total points in a route. 8 way points.
+  flash message for that?
 
 

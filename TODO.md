@@ -21,4 +21,8 @@ JACOB:
   hardcode two routes to show at onces
   make draw all routes button
 
+  add marker to db and map
+  request all locations for day without showing markers
+  route them
+
 

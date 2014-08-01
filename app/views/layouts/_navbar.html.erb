@@ -7,7 +7,7 @@
       <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
             <li class="navname">Welcome, <strong><%= current_user.name %></strong>!</li>
-            <li><a href="">About This App</a></li>
+            <li>  <%= render "layouts/about" %> </li>
             <li><%= link_to 'LOG OUT', logout_path %></li>
           <% else %>
             <li><a class="facebook-button" href="/auth/facebook"><img src="http://www.kilnandco.com/gallery/var/albums/facebook-login-button.png?m=1375582078" height="40"></a></li>

@@ -1,19 +1,24 @@
 WE NEED TO DO THIS STUFF:
 
 1. Map Functionality
-  a. remove pins
-  b. drop all pins from a day
-  c. add pin and reanimate
-  d. show multiple day's routes at once
+  a. dont do initial ajax get request on page load
+  b. clear route (hide polyline)
+  c. add pin and reanimate bug fix
+  d. hardcode two routes to show at onces
+  e. make draw all routes button
 
-2. User 
-  a. sessions/omniauth
-  b. 
+
 
 3. Style
   a. Bootstrap!
 
 ****. MAP STYLE STUFF
-  a. hide parks/public transit symbols
+
   b. stylize polylines
   c. add ANIMATIONs
+
+JACOB:
+  hardcode two routes to show at onces
+  make draw all routes button
+
+

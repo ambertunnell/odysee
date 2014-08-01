@@ -22,6 +22,13 @@ class DaysController < ApplicationController
     render json: @locations
   end
 
+  def destroy
+    # binding.pry
+    @day = Day.find(day_params[:date])
+    @day.destroy
+    format.json { render json: ""}
+  end
+
 
   private
 

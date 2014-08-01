@@ -3,13 +3,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
   resources :locations, :only => [:index, :create]
-  resources :days, :only => [:create, :show] 
+  resources :days, :only => [:create, :show, :destroy] 
 
   resources :users
 
   # You can have the root of your site routed with "root"
   # root 'locations#index'
   root 'users#show'
+
+  post '/delete_day' => 'days#destroy'
 
   get '/login' => 'sessions#new'
   get '/auth/facebook/callback' => 'sessions#create'

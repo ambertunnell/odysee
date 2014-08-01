@@ -328,6 +328,20 @@ $(function () {
     }
     setAllMap(null);
     markers = [];
+
+    var day_to_delete = $("#location_day_id option:selected");
+    var day_value = day_to_delete.val();
+    day_to_delete.remove();
+    directionsDisplay.setDirections({routes: []});
+
+    $.ajax({
+      type: "POST",
+      url: "/delete_day",
+      data: {day: {date: day_value}},
+      success: function(response){
+        alert("YO MAMA");
+      }
+    })
   });
 
 

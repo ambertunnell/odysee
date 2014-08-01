@@ -9,6 +9,7 @@ $(function () {
         data: {day: {date: $("#day_date").val()}},
         success: function(response){
           $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>")
+          $("#day_date").val('')
         }
       })
     });

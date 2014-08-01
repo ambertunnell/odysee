@@ -6,6 +6,7 @@ $(function () {
   var directionsService = new google.maps.DirectionsService();
   var dayLocations;
   var id = $("#location_day_id").val();
+  var routeVisible = false;
 
   function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer();
@@ -138,7 +139,7 @@ $(function () {
               },
               success: function () {
                   placeMarker(event.latLng);
-                  requestDayLocations(); 
+                  requestDayLocations();
               }
           });
       });
@@ -218,7 +219,7 @@ $(function () {
                   },
                   success: function () {
                       createMarker(results[0]);
-                      requestDayLocations();//causes reappearing of all markers
+                      requestDayLocations();
                   }
               });
           }
@@ -262,60 +263,75 @@ $(function () {
           if (status == google.maps.DirectionsStatus.OK) {
               directionsDisplay.setDirections(response);
               var route = response.routes[0];
+              routeVisible = true; 
           }
       });
   }
 
   $(".animate").click(function (e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      removeMarkers(); //not removing markers added manually?
-      calcRoute();
+    //resist the urge to put requestDayLocations() here!
+    resetRoute();
+    calcRoute();
+    removeMarkers(); 
   });
 
   $('.clear_route').click(function(){
+    resetRoute();
+  });
+
+  function resetRoute(){
     directionsDisplay.setDirections({routes: []});
-  });
-
-  /////////// Change day //////////////////
-
-  $("#location_day_id").change(function() {
-      directionsDisplay.setDirections({routes: []}); //make that a function
-      removeMarkers();
-
-      requestDayLocations();
-  });
-
-  ////// GET locations from current selected day //////
-
-  function removeMarkers() {
-      for (i = 0; i < markers.length; i++) {
-          markers[i].setMap(null);
-      }
+    routeVisible = false;
   }
 
+
+  /////////// Change day //////////////////
+  $("#location_day_id").change(function() {
+    resetRoute(); 
+    removeMarkers();
+
+    requestDayLocations();
+  });
+
+
+  function removeMarkers() {
+    for (i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+  }
+
+  ////// GET locations from current selected day //////
   function requestDayLocations(){
     var id = $("#location_day_id").val();
 
     $.ajax({
-        type: "GET",
-        url: "/days/show",
-        data: { day: { id: id } },
-        success: function (response) {
-            addDayLocations(response);
-        }
+      type: "GET",
+      url: "/days/show",
+      data: { day: { id: id } },
+      success: function (response) {
+        addDayLocations(response);
+      }
     });
   }
 
+  //// adds list of locations as markers to the map
   function addDayLocations(locations) {
       dayLocations = [];
+      var latitude, longitude;
+    
       for (var i = 0; i < locations.length; i++) {
-          var latitude = locations[i].latitude;
-          var longitude = locations[i].longitude;
-          dayLocations.push([latitude, longitude]);
+        latitude  = locations[i].latitude;
+        longitude = locations[i].longitude;
+        dayLocations.push([latitude, longitude]);
+        
+        if(routeVisible == false){
           placeMarker(new google.maps.LatLng(latitude, longitude));
-      }
+        } 
+      } 
   }
+
   /////////Delete Day and its markers///////
   $(".delete_day").click(function (e) {
     e.preventDefault();
@@ -337,7 +353,7 @@ $(function () {
       data: {day: {date: day_value}},
       success: function(response){
         day_to_delete.remove();
-        directionsDisplay.setDirections({routes: []});
+        resetRoute();
       }
     })
   });

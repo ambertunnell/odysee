@@ -127,8 +127,8 @@ $(function () {
           var longitude = event.latLng.B;
           var day_id = $('#location_day_id').val();
   
-          addLocation(latitude, longitude, day_id);
-          
+          addLocation(latitude, longitude, day_id, event);
+        
       });
 
       ////// event listener for removing location by clicking on pin /////
@@ -193,7 +193,28 @@ $(function () {
               var longitude = results[0].geometry.location.B;
               var day_id = $('#location_day_id').val();
 
-              addLocation(latitude, longitude, day_id);  
+              //addLocation(latitude, longitude, day_id); //problem with 'event'
+              
+              $.ajax({
+                  type: "POST",
+                  url: "/locations",
+                  data: {
+                      location: {
+                          name: name,
+                          latitude: latitude,
+                          longitude: longitude,
+                          day_id: day_id
+                      }
+                  },
+                  success: function () {
+                    createMarker(results[0]);
+                    requestDayLocations();
+                  },
+                  error: function(response){
+                    /////don't forget me
+
+                  }
+              });           
           }
       }
 
@@ -212,7 +233,7 @@ $(function () {
   });
 
   ///////////// Add a Location/////////////
-  function addLocation(latitude, longitude, day_id){
+  function addLocation(latitude, longitude, day_id, event){
     $.ajax({
             type: "POST",
             url: "/locations",

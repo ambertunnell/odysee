@@ -1,13 +1,18 @@
 class LocationsController < ApplicationController
 
   def create
-    @user = User.find(session[:user_id]) if session[:user_id]
+    @user     = User.find(session[:user_id]) if session[:user_id]
     @location = Location.new(location_params)
-    @day = Day.find(params[:location][:day_id])
-    @day.locations << @location
-    if @location.save
-      redirect_to root_url
-    end   
+    @day      = Day.find(params[:location][:day_id])
+    
+    respond_to do |format|
+      if @day.locations.size < 10
+        @day.locations << @location
+        format.json { render json: @location }
+      else 
+        format.json { render json: "There is a limit of 10 locations per day. Sorry!", status: :unprocessable_entity }
+      end
+    end
   end
 
   # def destroy

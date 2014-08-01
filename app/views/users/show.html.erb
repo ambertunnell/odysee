@@ -3,7 +3,7 @@
 <div class="forms">
   <%= form_for @day, :html => {class: "add_day"} do |f| %>
     <%= f.label :date, "Add a New Date" %>
-    <%= f.text_field :date, :placeholder => "7/23/2014", :type => "search" %>
+    <%= f.text_field :date, :placeholder => "e.g. 7/23/2014", :type => "search" %>
     <%= f.submit "Add Date", :class => "btn" %>
   <% end %>
 
@@ -16,7 +16,7 @@
     <%= f.submit "Add Location", :class => "btn" %>
   <% end %>
 
-  <button class="animate btn">Draw route</button>
+  <button class="animate btn">Draw Route</button>
   <button class="delete_day btn">Delete Day</button>
 </div> 
 
@@ -24,5 +24,8 @@
 
 <!-- NOT LOGGED IN -->
 <% else %>
+
+<div class="background_image">
+</div>
 
 <% end %>

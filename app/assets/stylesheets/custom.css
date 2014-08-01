@@ -1,3 +1,13 @@
+.background_image {
+  background: url(https://files.gitter.im//ufqH/_TD61693-2.jpg) no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+  margin-top: -80px;
+}
+
+
 html { 
   height: 100%;
 }
@@ -20,6 +30,10 @@ body {
   font-family: "Montserrat", sans-serif !important;
   font-weight: 500 !important;
   color: #88b7b3;
+}
+
+.navbar a:hover {
+  color: #88b7b3 !important;
 }
 
 .navbar {
@@ -89,7 +103,6 @@ input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
   display: none; 
 }
-
 
 input[type=search] {
   background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;

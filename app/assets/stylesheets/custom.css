@@ -13,6 +13,8 @@ body {
  
 }
 
+/* Navigation Bar */
+
 .navbar-brand {
   font-size: 30px !important;
   font-family: "Montserrat", sans-serif !important;
@@ -44,6 +46,8 @@ body {
   text-transform: uppercase;
 }
 
+/* Forms */
+
 .forms {
   background-color: #88b7b3;
   width: 80%;
@@ -70,7 +74,7 @@ body {
 }
 
 
-
+/*awesome styling for search boxes*/
 
 input {
   outline: none;

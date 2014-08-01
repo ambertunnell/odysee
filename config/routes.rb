@@ -10,9 +10,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'locations#index'
   root 'users#show'
-
-  post '/delete_day' => 'days#destroy'
-
+  
   get '/login' => 'sessions#new'
   get '/auth/facebook/callback' => 'sessions#create'
   # get '/auth/facebook' => 'sessions#create'

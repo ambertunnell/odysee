@@ -11,7 +11,12 @@ $(function () {
   function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer(
         {
-          suppressMarkers: true
+          suppressMarkers: true,
+          polylineOptions: {
+            strokeColor: '#88b7b3',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+          } 
         });
       var mapOptions = {
           center: new google.maps.LatLng(40.783027, -73.965387),

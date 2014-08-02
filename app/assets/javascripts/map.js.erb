@@ -9,7 +9,10 @@ $(function () {
   var routeVisible = false;
 
   function initialize() {
-      directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay = new google.maps.DirectionsRenderer(
+        {
+          suppressMarkers: true
+        });
       var mapOptions = {
           center: new google.maps.LatLng(40.783027, -73.965387),
           zoom: 13,
@@ -302,6 +305,7 @@ $(function () {
 
   $('.clear_route').click(function(){
     resetRoute();
+    requestDayLocations();
   });
 
   function resetRoute(){

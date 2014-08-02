@@ -11,7 +11,10 @@ $(function () {
   function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer(
         {
-          suppressMarkers: true,
+          markerOptions: {
+            icon: "blackdot.gif",
+            visible: true
+          },
           polylineOptions: {
             strokeColor: '#88b7b3',
             strokeOpacity: 1.0,

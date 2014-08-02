@@ -24,17 +24,22 @@ class DaysController < ApplicationController
   end
 
   def destroy
-    # binding.pry
     @day = Day.find(day_params[:date])
     @day.destroy
     render json: {}
   end
 
+  def destroy_locations
+    @day = Day.find(params[:day][:id])
+    @day.locations = []
+    render json: {}
+  end   
+
 
   private
 
   def day_params
-    params.require(:day).permit(:date, :user_id)
+    params.require(:day).permit(:id, :date, :user_id)
   end 
 
 end

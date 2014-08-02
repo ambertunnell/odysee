@@ -7,18 +7,6 @@ body {
   
 }
 
-.footer {
-   clear: both;
-   left:0px;
-   padding-left: 20px;
-   padding-top: 20px;
-   padding-bottom: 20px;
-   bottom:0px;
-   height:60px;
-   width:100%;
-   background:white;
-   color: #777777;
-} 
 
 /* Instruction Section on Front Page */
 .instructions {
@@ -46,6 +34,20 @@ body {
   margin: auto;
   clear: both;
 }
+
+.footer {
+   clear: both;
+   left:0px;
+   padding-left: 20px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   bottom:0px;
+   height:60px;
+   width:100%;
+   background:white;
+   color: #777777;
+   position: absolute;
+} 
 
 /* About Modal */
 .modalDialog {

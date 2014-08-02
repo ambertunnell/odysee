@@ -393,5 +393,30 @@ $(function () {
     })
   });
 
+    /////////Clear a Day's markers///////
+  $(".clear_day").click(function (e) {
+    e.preventDefault();
+    function setAllMap(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+    setAllMap(null);
+    markers = [];
+
+    var day = $("#location_day_id option:selected");
+    var day_value = day.val();
+
+
+    $.ajax({
+      type: "POST",
+      url: "/days/destroy_locations",
+      data: {day: {id: day_value}},
+      success: function(response){
+        resetRoute();
+      }
+    })
+  });
+
 
 });

@@ -15,13 +15,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @location = Location.where(:latitude => params[:latitude], :longitude => params[:longitude], :day_id => params[:day_id]).first
-  #   if @location.destroy
-  #     redirect_to root_url
-  #   end    
-  # end
-
   private
 
   def location_params

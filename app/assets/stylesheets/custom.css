@@ -7,25 +7,14 @@ body {
   
 }
 
-.background_image {
-  background: url("map-screenshot.png") no-repeat center center fixed;
-  background-size: cover;
-  -webkit-background-size: cover;
-  min-width: 100%;
-  min-height: 100%;
-  margin-top: -80px;
-  margin-bottom: -120px;
-}
-
 .instructions {
-   position:fixed;
    clear: both;
    left:0px;
    padding-left: 20px;
-   padding-top: 50px;
+   padding-top: 80px;
    padding-bottom: 40px;
    bottom:60px;
-   height:150px;
+   height:200px;
    width:100%;
    background:#f8f8f8;
    color: #777777;
@@ -36,7 +25,6 @@ body {
 }
 
 .footer {
-   position:fixed;
    clear: both;
    left:0px;
    padding-left: 20px;
@@ -51,9 +39,9 @@ body {
 
 #map-canvas { 
   height: 100%;
-  margin: auto;
+  width: 80%;
+  margin: auto auto 60px auto;
   clear: both;
- 
 }
 
 /* About Modal */

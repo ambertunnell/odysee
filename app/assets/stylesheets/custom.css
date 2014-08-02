@@ -40,7 +40,7 @@ body {
 #map-canvas { 
   height: 100%;
   width: 80%;
-  margin: auto auto 60px auto;
+  margin: auto;
   clear: both;
 }
 

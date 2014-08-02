@@ -26,9 +26,7 @@
 
 </div> 
 
-  <div id="map-canvas"/>
-
-<%= render "layouts/footer" %> 
+<div id="map-canvas"/>
 
 <!-- NOT LOGGED IN -->
 <% else %>
@@ -36,6 +34,5 @@
 <div class="background_image"><%= image_tag "map-screenshot.png", width: "100%" %></div>
 
 <%= render "layouts/instructions" %> 
-<%= render "layouts/footer" %> 
 
 <% end %>

@@ -7,6 +7,20 @@ body {
   
 }
 
+.footer {
+   clear: both;
+   left:0px;
+   padding-left: 20px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   bottom:0px;
+   height:60px;
+   width:100%;
+   background:white;
+   color: #777777;
+} 
+
+/* Instruction Section on Front Page */
 .instructions {
    clear: both;
    left:0px;
@@ -24,19 +38,8 @@ body {
    font-weight: 300 !important;
 }
 
-.footer {
-   clear: both;
-   left:0px;
-   padding-left: 20px;
-   padding-top: 20px;
-   padding-bottom: 20px;
-   bottom:0px;
-   height:60px;
-   width:100%;
-   background:white;
-   color: #777777;
-}   
-
+  
+/* Map */
 #map-canvas { 
   height: 100%;
   width: 80%;
@@ -200,7 +203,6 @@ input[type=search]:focus {
   -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
   box-shadow: 0 0 5px rgba(109,207,246,.5);
 }
-
 
 input:-moz-placeholder {
   color: #999;

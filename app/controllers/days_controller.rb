@@ -18,13 +18,13 @@ class DaysController < ApplicationController
   end 
 
   def index
+    binding.pry
     @user = User.find(session[:user_id]) if session[:user_id]
     @days = @user.days
     render json: @days
   end
 
   def show
-    binding.pry
     @user = User.find(session[:user_id]) if session[:user_id]
     @locations = Day.find(params[:day][:id]).locations
     render json: @locations

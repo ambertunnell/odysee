@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jquery-ui-rails'
+#gem 'jquery-ui-rails'
 gem 'geocoder'
 gem 'google_places'
 gem 'omniauth'

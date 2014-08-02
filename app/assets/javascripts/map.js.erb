@@ -300,42 +300,42 @@ $(function () {
       });
   }
 
-  function calcAllRoutes(){
-      // removeMarkers();
+   function calcAllRoutes(){
+  //     // removeMarkers();
     
-    for(var i = 0; i < allDayLocations.length; i++){
+  //   for(var i = 0; i < allDayLocations.length; i++){
       
-      var start = new google.maps.LatLng(dayLocations[0][0], dayLocations[0][1]);
-      var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
-      var waypts = [];
+  //     var start = new google.maps.LatLng(dayLocations[0][0], dayLocations[0][1]);
+  //     var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
+  //     var waypts = [];
 
-      for (var i = 1; i < dayLocations.length - 1; i++) {
-          waypts.push({
-              location: new google.maps.LatLng(dayLocations[i][0], dayLocations[i][1]),
-              stopover: true
-          });
-      }
+  //     for (var i = 1; i < dayLocations.length - 1; i++) {
+  //         waypts.push({
+  //             location: new google.maps.LatLng(dayLocations[i][0], dayLocations[i][1]),
+  //             stopover: true
+  //         });
+  //     }
 
-      var request = {
-          origin: start,
-          destination: end,
-          waypoints: waypts,
-          optimizeWaypoints: false,
-          travelMode: google.maps.TravelMode.WALKING
-      };
-      directionsService.route(request, function (response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
-              var route = response.routes[0];
-              routeVisible = true; 
-          }
-      });
+  //     var request = {
+  //         origin: start,
+  //         destination: end,
+  //         waypoints: waypts,
+  //         optimizeWaypoints: false,
+  //         travelMode: google.maps.TravelMode.WALKING
+  //     };
+  //     directionsService.route(request, function (response, status) {
+  //         if (status == google.maps.DirectionsStatus.OK) {
+  //             directionsDisplay.setDirections(response);
+  //             var route = response.routes[0];
+  //             routeVisible = true; 
+  //         }
+  //     });
 
       
 
 
-    }
-  }
+  //   }
+   }
 
   ///// DRAW BUTTONS /////
   $(".animate").click(function (e) {
@@ -396,7 +396,7 @@ $(function () {
 
     $.ajax({
       type: "GET",
-      url: "/days/show", //should change to '/days/' + id ????
+      url: "/days/show", 
       data: { day: { id: id } },
       success: function (response) {
         addDayLocations(response);
@@ -408,8 +408,12 @@ $(function () {
 
      $.ajax({
       type: "GET",
-      url: "/days/index",
+      url: "/days",
       success: function (response) {
+        console.log(response);
+        addAllDayLocations(response);
+      },
+      error: function (response) {
         console.log(response);
         addAllDayLocations(response);
       }
@@ -440,11 +444,12 @@ $(function () {
 
     for (var i = 0; i < days.length; i++) {
     
-      for (var i = 0; i < days.length; i++) {
-        latitude  = days[i].latitude;
-        longitude = days[i].longitude;
+      for (var j = 0; j < days.length; j++) {
+        latitude  = days[j].latitude;
+        longitude = days[j].longitude;
         dayLocations.push([latitude, longitude]);
       }
+
     }
   }
 
@@ -471,7 +476,7 @@ $(function () {
         day_to_delete.remove();
         resetRoute();
       }
-    })
+    });
   });
 
 

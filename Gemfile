@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
-gem "figaro"
-gem 'gmaps4rails'
+gem 'jquery-ui-rails'
 gem 'geocoder'
 gem 'google_places'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'figaro'
 
 gem 'underscore-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -38,9 +40,6 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'figaro'
 
 group :test, :development do
   gem "rspec-rails"

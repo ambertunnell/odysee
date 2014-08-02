@@ -5,6 +5,7 @@ $(function () {
   var directionsDisplay;
   var directionsService = new google.maps.DirectionsService();
   var dayLocations;
+  var allDayLocations;
   var id = $("#location_day_id").val();
   var routeVisible = false;
 
@@ -219,7 +220,7 @@ $(function () {
                     requestDayLocations();
                   },
                   error: function(response){
-                    /////don't forget me
+                    /////don't forget me!
 
                   }
               });           
@@ -270,7 +271,7 @@ $(function () {
   }
 
 
-  ///////////// Add a route /////////////////
+  ///////////// Calculate and Show Route /////////////////
   function calcRoute() {
       var start = new google.maps.LatLng(dayLocations[0][0], dayLocations[0][1]);
       var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
@@ -299,6 +300,44 @@ $(function () {
       });
   }
 
+  function calcAllRoutes(){
+      // removeMarkers();
+    
+    for(var i = 0; i < allDayLocations.length; i++){
+      
+      var start = new google.maps.LatLng(dayLocations[0][0], dayLocations[0][1]);
+      var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
+      var waypts = [];
+
+      for (var i = 1; i < dayLocations.length - 1; i++) {
+          waypts.push({
+              location: new google.maps.LatLng(dayLocations[i][0], dayLocations[i][1]),
+              stopover: true
+          });
+      }
+
+      var request = {
+          origin: start,
+          destination: end,
+          waypoints: waypts,
+          optimizeWaypoints: false,
+          travelMode: google.maps.TravelMode.WALKING
+      };
+      directionsService.route(request, function (response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(response);
+              var route = response.routes[0];
+              routeVisible = true; 
+          }
+      });
+
+      
+
+
+    }
+  }
+
+  ///// DRAW BUTTONS /////
   $(".animate").click(function (e) {
     e.preventDefault();
 
@@ -307,6 +346,23 @@ $(function () {
     calcRoute();
     removeMarkers(); 
   });
+
+  $('.animate_all').click(function (e){
+    e.preventDefault();
+
+    resetRoute();
+    requestAllDayLocations(); 
+    calcAllRoutes();
+
+  });
+
+
+  
+
+
+
+
+
 
   $('.clear_route').click(function(){
     resetRoute();
@@ -340,13 +396,27 @@ $(function () {
 
     $.ajax({
       type: "GET",
-      url: "/days/show",
+      url: "/days/show", //should change to '/days/' + id ????
       data: { day: { id: id } },
       success: function (response) {
         addDayLocations(response);
       }
     });
   }
+
+  function requestAllDayLocations(){
+
+     $.ajax({
+      type: "GET",
+      url: "/days/index",
+      success: function (response) {
+        console.log(response);
+        addAllDayLocations(response);
+      }
+    });
+    
+  }
+
 
   //// adds list of locations as markers to the map
   function addDayLocations(locations) {
@@ -362,6 +432,20 @@ $(function () {
           placeMarker(new google.maps.LatLng(latitude, longitude));
         } 
       } 
+  }
+
+  function addAllDayLocations(days){
+    allDayLocations = [];
+    var latitude, longitude;
+
+    for (var i = 0; i < days.length; i++) {
+    
+      for (var i = 0; i < days.length; i++) {
+        latitude  = days[i].latitude;
+        longitude = days[i].longitude;
+        dayLocations.push([latitude, longitude]);
+      }
+    }
   }
 
   /////////Delete Day and its markers///////

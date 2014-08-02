@@ -17,14 +17,21 @@ class DaysController < ApplicationController
     end
   end 
 
+  def index
+    @user = User.find(session[:user_id]) if session[:user_id]
+    @days = @user.days
+    render json: @days
+  end
+
   def show
+    binding.pry
     @user = User.find(session[:user_id]) if session[:user_id]
     @locations = Day.find(params[:day][:id]).locations
     render json: @locations
   end
 
   def destroy
-    # binding.pry
+
     @day = Day.find(day_params[:date])
     @day.destroy
     render json: {}

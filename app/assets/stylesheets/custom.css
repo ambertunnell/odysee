@@ -108,7 +108,7 @@ body {
 /* Instructions Boxes */
 .front-quote {
   color: #5F755E;
-  background-color: rgba(253,253,253,0.4);
+  background-color: rgba(253,253,253,0.7);
   border-radius: 10px;
   z-index: 999;
   width: 60%;

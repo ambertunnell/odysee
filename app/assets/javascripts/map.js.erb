@@ -9,6 +9,9 @@ $(function () {
     var id = $("#location_day_id").val();
     var routeVisible = false;
 
+    var renderArray; 
+    var requestArray;
+
     function initialize() {
 
         var mapOptions = {
@@ -118,11 +121,11 @@ $(function () {
 
         ////// event listener for user adding location by clicking on map /////
         google.maps.event.addListener(map, 'click', function (event) {
-
             var latitude = event.latLng.k;
             var longitude = event.latLng.B;
             var day_id = $('#location_day_id').val();
 
+            
             addLocation(latitude, longitude, day_id, event);
 
         });
@@ -277,8 +280,11 @@ $(function () {
 
     function calcAllRoutes() {
         var start, end, waypts;
-        var renderArray = [];
-        var requestArray = [];
+        // var renderArray = [];
+        // var requestArray = [];
+
+        renderArray  = [];
+        requestArray = [];
 
         removeMarkers();
 
@@ -340,6 +346,22 @@ $(function () {
 
     }
 
+    // call it remove or hide or clear?
+    function removeAllRoutes(){
+      if (renderArray != undefined){
+        // simply setting renderArray = null doesn't work        
+        for(var i = 0; i < renderArray.length; i++){
+          renderArray[i].setDirections( { routes: [] } ); 
+        }
+
+        // probably not necessarry
+        for(var i = 0; i < requestArray.length; i++){
+          requestArray[i] = null;
+        }
+      }
+
+    }
+
     // Random Color Generator
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
@@ -356,6 +378,7 @@ $(function () {
 
         //resist the urge to put requestDayLocations() here!
         resetRoute();
+        removeAllRoutes();
         calcRoute(dayLocations);
         removeMarkers();
     });
@@ -363,6 +386,7 @@ $(function () {
     $(".animate_all").click(function (e) {
         e.preventDefault();
 
+        removeAllRoutes();
         resetRoute();
         requestAllDayLocations();
 
@@ -385,6 +409,7 @@ $(function () {
     /////////// Change day //////////////////
     $("#location_day_id").change(function () {
         resetRoute();
+        removeAllRoutes();
         removeMarkers();
 
         requestDayLocations();

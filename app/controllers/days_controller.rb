@@ -18,9 +18,12 @@ class DaysController < ApplicationController
   end 
 
   def index
-    binding.pry
     @user = User.find(session[:user_id]) if session[:user_id]
-    @days = @user.days
+   
+    @days = @user.days.includes(:locations).map do |day|
+      day.locations
+    end
+
     render json: @days
   end
 

@@ -300,42 +300,41 @@ $(function () {
       });
   }
 
-   function calcAllRoutes(){
-  //     // removeMarkers();
+  function calcAllRoutes(){
+    var start, end, waypts;
+    removeMarkers();
     
-  //   for(var i = 0; i < allDayLocations.length; i++){
+    for(var i = 0; i < allDayLocations.length; i++){
       
-  //     var start = new google.maps.LatLng(dayLocations[0][0], dayLocations[0][1]);
-  //     var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
-  //     var waypts = [];
+      start = new google.maps.LatLng(allDayLocations[0][0][0], allDayLocations[0][0][1]);
+      end = new google.maps.LatLng(allDayLocations[allDayLocations.length-1][0][0], allDayLocations[allDayLocations.length-1][0][1]);
+      waypts = [];
 
-  //     for (var i = 1; i < dayLocations.length - 1; i++) {
-  //         waypts.push({
-  //             location: new google.maps.LatLng(dayLocations[i][0], dayLocations[i][1]),
-  //             stopover: true
-  //         });
-  //     }
+      for (var j = 1; j < allDayLocations[i].length - 1; j++) {
+          waypts.push({
+              location: new google.maps.LatLng(allDayLocations[i][0][0], allDayLocations[i][0][1]),
+              stopover: true
+          });
+      }
 
-  //     var request = {
-  //         origin: start,
-  //         destination: end,
-  //         waypoints: waypts,
-  //         optimizeWaypoints: false,
-  //         travelMode: google.maps.TravelMode.WALKING
-  //     };
-  //     directionsService.route(request, function (response, status) {
-  //         if (status == google.maps.DirectionsStatus.OK) {
-  //             directionsDisplay.setDirections(response);
-  //             var route = response.routes[0];
-  //             routeVisible = true; 
-  //         }
-  //     });
+      var request = {
+          origin: start,
+          destination: end,
+          waypoints: waypts,
+          optimizeWaypoints: false,
+          travelMode: google.maps.TravelMode.WALKING
+      };
+      directionsService.route(request, function (response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+              directionsDisplay.setDirections(response);
+              var route = response.routes[0];
+              routeVisible = true; 
+          }
+      });
 
-      
-
-
-  //   }
-   }
+  
+    }
+  }
 
   ///// DRAW BUTTONS /////
   $(".animate").click(function (e) {
@@ -351,8 +350,7 @@ $(function () {
     e.preventDefault();
 
     resetRoute();
-    requestAllDayLocations(); 
-    calcAllRoutes();
+    requestAllDayLocations()
 
   });
 
@@ -410,11 +408,6 @@ $(function () {
       type: "GET",
       url: "/days",
       success: function (response) {
-        console.log(response);
-        addAllDayLocations(response);
-      },
-      error: function (response) {
-        console.log(response);
         addAllDayLocations(response);
       }
     });
@@ -423,9 +416,9 @@ $(function () {
 
 
   //// adds list of locations as markers to the map
-  function addDayLocations(locations) {
+  function addDayLocations(locations, drawingAll) {
       dayLocations = [];
-      var latitude, longitude;
+      var latitude, longitude;  
     
       for (var i = 0; i < locations.length; i++) {
         latitude  = locations[i].latitude;
@@ -440,17 +433,21 @@ $(function () {
 
   function addAllDayLocations(days){
     allDayLocations = [];
-    var latitude, longitude;
+    var latitude, longitude, day;
 
+    // thru days
     for (var i = 0; i < days.length; i++) {
-    
-      for (var j = 0; j < days.length; j++) {
-        latitude  = days[j].latitude;
-        longitude = days[j].longitude;
-        dayLocations.push([latitude, longitude]);
-      }
+      day = []
 
+      // thru locations
+      for (var j = 0; j < days[i].length; j++) {
+        latitude  = days[i][j].latitude;
+        longitude = days[i][j].longitude;
+        day.push([latitude, longitude]);
+      }
+      allDayLocations.push(day);
     }
+    calcAllRoutes();
   }
 
   /////////Delete Day and its markers///////

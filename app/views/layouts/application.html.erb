@@ -5,6 +5,10 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= analytics_init if Rails.env.production? %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <%= favicon_link_tag '/favicon.ico' %>
+    <meta name="keywords" content="Flatiron School"/>
+    <meta name="description" content="">
   </head>
   <body>
 

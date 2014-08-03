@@ -11,15 +11,16 @@
 
   <%= form_for @location, :html => {class: "add_location"} do |f| %>
     <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "--Pick a Day--"} %>
+    <br>
     <%= f.label :name, "WHERE DID YOU GO?" %>
     <%= f.text_field :name, :placeholder => "e.g. Central Park", :type => "search" %>
     <%= f.submit "Add Location", :class => "btn btn-sm" %>
   <% end %>
-
+  <br>
   <button class="clear_day btn btn-default">Clear Day</button>
   <button class="delete_day btn btn-default">Delete Day</button>
-  <button class="animate btn btn-default">Draw Route</button>
-  <button class="clear_route btn btn-default">Hide Route</button>
+  <button class="animate btn btn-default">Draw Today</button>
+  <button class="clear_route btn btn-default">Hide Today</button>
 
 </div> 
 

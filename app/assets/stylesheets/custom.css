@@ -100,6 +100,75 @@ body {
 
 .close:hover { color: #88b7b3; }
 
+/* Instructions Boxes */
+.learn-more-btn {
+  position: fixed;
+  opacity: 1;
+  background: red;
+}
+
+.box {
+  display: block;
+  right: 20px !important;
+  color: #777777;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  z-index: 999;
+}
+
+.instruction-boxes {
+  position: fixed;
+  display: block;
+  overflow: scroll;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  opacity:1;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.instruction-boxes:target {
+  opacity:1;
+  pointer-events: auto;
+}
+
+.instruction-boxes > .modal-box {
+  width: 50%;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 0px;
+  color: #fff;
+}
+
+.instruction-boxes h2, h3 {
+  color: #88b7b3;
+}
+
+.close {
+  color: #fff;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  font-size: 60px;
+  top: -20px;
+  width: 80px;
+  height: 80px;
+  text-decoration: none;
+}
+
+.close:hover { color: #88b7b3; }
+
 /* Navigation Bar */
 
 .navbar-brand {
@@ -196,7 +265,7 @@ input[type=search] {
   transition: all .5s;
 }
 input[type=search]:focus {
-  width: 400px;
+  width: 60%;
   background-color: #fff;
   border-color: #66CC75;
   

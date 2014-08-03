@@ -1,30 +1,45 @@
 <% if logged_in? %>
 
-<div class="forms">
-
+<div class="forms container">
   <%= form_for @day, :html => {class: "add_day"} do |f| %>
-    <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>
-    <%= f.submit "Add Date", :class => "btn btn-sm" %>
+    <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>  
+    <%= f.submit "Add Date", :class => "btn btn-sm" %> 
   <% end %>
-  
-  <div style="height: 15px;"></div>
 
   <%= form_for @location, :html => {class: "add_location"} do |f| %>
-    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "--Pick a Day--"} %>
-    <br>
-    <%= f.label :name, "WHERE DID YOU GO?" %>
+    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
     <%= f.text_field :name, :placeholder => "e.g. Central Park", :type => "search" %>
     <%= f.submit "Add Location", :class => "btn btn-sm" %>
   <% end %>
-  <br>
+
+      <div class="col-md-4 dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+          Options
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation" class="dropdown-header">Day</li>
+          <li role="presentation"><a class="clear_day" role="menuitem" tabindex="-1" href="#">Clear Locations</a></li>
+          <li role="presentation"><a  class="delete_day" role="menuitem" tabindex="-1" href="#">Delete Day</a></li>
+          <li role="presentation" class="divider"></li>
+          <li role="presentation" class="dropdown-header">Day Route</li>
+          <li role="presentation"><a class="animate" role="menuitem" tabindex="-1" href="#">Draw Today</a></li>
+          <li role="presentation"><a class="clear_route" role="menuitem" tabindex="-1" href="#">Hide Today</a></li>
+          <li role="presentation" class="divider"></li>
+          <li role="presentation" class="dropdown-header">All Routes</li>
+          <li role="presentation"><a class="animate_all" role="menuitem" tabindex="-1" href="#">Draw All</a></li>
+        </ul>
+      </div>
+
+<!-- <div class="well">
   <button class="clear_day btn btn-default">Clear Day</button>
   <button class="delete_day btn btn-default">Delete Day</button>
   <button class="animate btn btn-default">Draw Today</button>
   <button class="clear_route btn btn-default">Hide Today</button>
   <button class="animate_all btn btn-default">Draw All</button>
-  <button class="clear_route btn btn-default">Hide Route</button>
+</div> -->
 
-</div> 
+</div>
 
 <div id="map-canvas"/>
 
@@ -33,7 +48,11 @@
 
 <div class="background_image"><%= image_tag "map-screenshot.png", width: "100%" %></div>
 
-<%= render "layouts/instructions" %> 
+<div class="learn-more-btn">
+<%#= render "layouts/frontboxes" %>
+</div>
+
+<%#= render "layouts/instructions" %> 
 <%= render "layouts/footer" %> 
 
 <% end %>

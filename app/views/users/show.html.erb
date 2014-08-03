@@ -6,11 +6,15 @@
     <%= f.submit "Add Date", :class => "btn btn-sm" %> 
   <% end %>
 
+  <div style="height: 15px;"></div>
+
   <%= form_for @location, :html => {class: "add_location"} do |f| %>
     <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
     <%= f.text_field :name, :placeholder => "e.g. Central Park", :type => "search" %>
     <%= f.submit "Add Location", :class => "btn btn-sm" %>
   <% end %>
+
+<div style="height: 15px;"></div>
 
       <div class="col-md-4 dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -47,6 +51,9 @@
 <% else %>
 
 <div class="background_image"><%= image_tag "map-screenshot.png", width: "100%" %></div>
+<div class="front-quote">
+  <blockquote>Do not go where the path may lead, go instead where there is no path and leave a trail. <br><p style="float: right;">-Ralph Waldo Emerson</p></blockquote>
+</div>  
 
 <div class="learn-more-btn">
 <%#= render "layouts/frontboxes" %>

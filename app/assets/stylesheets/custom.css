@@ -33,6 +33,7 @@ body {
   width: 80%;
   margin: auto;
   clear: both;
+  z-index: 0;
 }
 
 .footer {
@@ -47,6 +48,10 @@ body {
    background:white;
    color: #777777;
 } 
+
+.footer a {
+  color: #668E86;
+}
 
 /* About Modal */
 .modalDialog {
@@ -101,6 +106,19 @@ body {
 .close:hover { color: #88b7b3; }
 
 /* Instructions Boxes */
+.front-quote {
+  color: #5F755E;
+  background-color: rgba(253,253,253,0.4);
+  border-radius: 10px;
+  z-index: 999;
+  width: 60%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+}
+
 .learn-more-btn {
   position: fixed;
   opacity: 1;
@@ -267,11 +285,11 @@ input[type=search] {
 input[type=search]:focus {
   width: 60%;
   background-color: #fff;
-  border-color: #66CC75;
+  border-color: rgba(136, 183, 179,.5);
   
-  -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-  -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-  box-shadow: 0 0 5px rgba(109,207,246,.5);
+  -webkit-box-shadow: 0 0 5px rgba(136, 183, 179,.5);
+  -moz-box-shadow: 0 0 5px rgba(136, 183, 179,.5);
+  box-shadow: 0 0 5px rgba(136, 183, 179,.5);
 }
 
 input:-moz-placeholder {

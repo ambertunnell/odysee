@@ -10,15 +10,15 @@ $(function () {
   var routeVisible = false;
 
   function initialize() {
-      directionsDisplay = new google.maps.DirectionsRenderer(
-        {
-          suppressMarkers: true,
-          polylineOptions: {
-            strokeColor: '#88b7b3',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-          } 
-        });
+      // directionsDisplay = new google.maps.DirectionsRenderer(
+      //   {
+      //     suppressMarkers: true,
+      //     polylineOptions: {
+      //       strokeColor: '#88b7b3',
+      //       strokeOpacity: 1.0,
+      //       strokeWeight: 3
+      //     } 
+      //   });
       var mapOptions = {
           center: new google.maps.LatLng(40.783027, -73.965387),
           zoom: 13,
@@ -126,7 +126,7 @@ $(function () {
       };
       map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
-      directionsDisplay.setMap(map);
+      // directionsDisplay.setMap(map);
 
       ////// event listener for user adding location by clicking on map /////
       google.maps.event.addListener(map, 'click', function (event) {
@@ -277,6 +277,19 @@ $(function () {
       var end = new google.maps.LatLng(dayLocations[dayLocations.length - 1][0], dayLocations[dayLocations.length - 1][1]);
       var waypts = [];
 
+      directionsDisplay = new google.maps.DirectionsRenderer(
+        {
+          suppressMarkers: true,
+          polylineOptions: {
+            strokeColor: '#88b7b3',
+            strokeOpacity: 1.0,
+            strokeWeight: 3
+          } 
+      });
+
+      directionsDisplay.setMap(map);
+
+
       for (var i = 1; i < dayLocations.length - 1; i++) {
           waypts.push({
               location: new google.maps.LatLng(dayLocations[i][0], dayLocations[i][1]),
@@ -302,9 +315,13 @@ $(function () {
 
   function calcAllRoutes(){
     var start, end, waypts;
+    var renderArray = [];;
+    
+
     removeMarkers();
     
     for(var i = 0; i < allDayLocations.length; i++){
+      
       
       start = new google.maps.LatLng(allDayLocations[0][0][0], allDayLocations[0][0][1]);
       end = new google.maps.LatLng(allDayLocations[allDayLocations.length-1][0][0], allDayLocations[allDayLocations.length-1][0][1]);
@@ -317,6 +334,8 @@ $(function () {
           });
       }
 
+     
+
       var request = {
           origin: start,
           destination: end,
@@ -324,13 +343,41 @@ $(function () {
           optimizeWaypoints: false,
           travelMode: google.maps.TravelMode.WALKING
       };
+
+      // renderArray[i] = new google.maps.DirectionsRenderer();
+
+      // {
+      //         suppressMarkers: true,
+      //         polylineOptions: {
+      //           strokeColor: '#88b7b3',
+      //           strokeOpacity: 1.0,
+      //           strokeWeight: 3
+      //         }
+      //       }
+
+      
       directionsService.route(request, function (response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
-              directionsDisplay.setDirections(response);
-              var route = response.routes[0];
-              routeVisible = true; 
+            renderArray[i] = new google.maps.DirectionsRenderer();
+            renderArray[i].setMap(map);
+            renderArray[i].setDirections(response); // .routes[0]
+            routeVisible = true; 
+
+            //directionsDisplay.setDirections(response);
           }
       });
+      
+
+
+
+        /// original
+      // directionsService.route(request, function (response, status) {
+      //     if (status == google.maps.DirectionsStatus.OK) {
+      //         directionsDisplay.setDirections(response);
+      //         var route = response.routes[0];
+      //         routeVisible = true; 
+      //     }
+      // });
 
   
     }
@@ -368,8 +415,10 @@ $(function () {
   });
 
   function resetRoute(){
-    directionsDisplay.setDirections({routes: []});
-    routeVisible = false;
+    if (directionsDisplay != undefined){
+      directionsDisplay.setDirections({routes: []});
+      routeVisible = false;
+    }
   }
 
 

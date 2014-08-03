@@ -3,12 +3,8 @@
 <div class="forms">
 
   <%= form_for @day, :html => {class: "add_day"} do |f| %>
-    <%= f.label :date, "ADD A NEW DATE" %>
-    <%= f.text_field :date, :placeholder => "e.g. 7/23/2014", :class => "datepicker" %>
-    <script>
-    $("#day_date").datepicker({ dateFormat: "yy-mm-dd" });
-    </script>
-    <%= f.submit "Add Date", :class => "btn" %>
+    <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>
+    <%= f.submit "Add Date", :class => "btn btn-sm" %>
   <% end %>
   
   <div style="height: 15px;"></div>
@@ -17,7 +13,7 @@
     <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "--Pick a Day--"} %>
     <%= f.label :name, "WHERE DID YOU GO?" %>
     <%= f.text_field :name, :placeholder => "e.g. Central Park", :type => "search" %>
-    <%= f.submit "Add Location", :class => "btn" %>
+    <%= f.submit "Add Location", :class => "btn btn-sm" %>
   <% end %>
 
   <button class="clear_day btn btn-default">Clear Day</button>

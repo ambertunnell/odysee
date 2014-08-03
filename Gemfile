@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-datepicker-rails'
 gem 'jquery-ui-rails'
 gem 'geocoder'
 gem 'google_places'

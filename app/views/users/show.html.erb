@@ -4,7 +4,7 @@
 
   <%= form_for @day, :html => {class: "add_day"} do |f| %>
     <%= f.label :date, "ADD A NEW DATE" %>
-    <%= f.text_field :date, :placeholder => "e.g. 7/23/2014", :type => "search" %>
+    <%= f.text_field :date, :placeholder => "e.g. 7/23/2014", :class => "datepicker" %>
     <script>
     $("#day_date").datepicker({ dateFormat: "yy-mm-dd" });
     </script>

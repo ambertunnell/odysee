@@ -17,6 +17,16 @@ class DaysController < ApplicationController
     end
   end 
 
+  def index
+    @user = User.find(session[:user_id]) if session[:user_id]
+   
+    @days = @user.days.includes(:locations).map do |day|
+      day.locations
+    end
+
+    render json: @days
+  end
+
   def show
     @user = User.find(session[:user_id]) if session[:user_id]
     @locations = Day.find(params[:day][:id]).locations

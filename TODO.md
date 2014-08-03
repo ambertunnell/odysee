@@ -3,7 +3,7 @@ WE NEED TO DO THIS STUFF:
 1. Map Functionality
   a. dont do initial ajax get request on page load
   b. clear route (hide polyline)
-  c. add pin and reanimate bug fix
+
   d. hardcode two routes to show at onces
   e. make draw all routes button
 

@@ -12,9 +12,6 @@ Todo:
 *Markers
 -add alert when trying to add more than 10 markers
 
-*Dropdown
--have where it automatically selects added day
-
 *Navbar
 -make responsive
 

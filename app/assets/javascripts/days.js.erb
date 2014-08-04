@@ -2,6 +2,7 @@ $(function () {
 /////////////// Add a date ///////////////////
     $("#new_day").submit(function(e){
       e.preventDefault();
+      $(".add_day").find(".error").text("")
       var day_id = $("#day_date").val();
      
       $.ajax({

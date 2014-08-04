@@ -1,7 +1,6 @@
 Todo:
 
 *Polylines:
--array of line colors,
 -fix line styling,
 -make dots better
 -animate!!!
@@ -16,8 +15,7 @@ Todo:
 -make responsive
 
 *Routes
--draw all only includes so many routes
+-draw all only includes so many routes - add alert?
 
 *Green bar
 -styling
-

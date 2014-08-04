@@ -119,7 +119,14 @@ body {
   padding: 5px 20px 13px 20px;
 }
 
-.learn-more-btn {
+/*#instruction-boxes {
+  z-index: 100;
+  color: #5F755E;
+  background-color: rgba(253,253,253,0.7);
+  border-radius: 10px;
+  width: 80%;
+}*/
+./*learn-more-btn {
   position: fixed;
   opacity: 1;
   background: red;
@@ -161,7 +168,7 @@ body {
 
 .instruction-boxes > .modal-box {
   width: 50%;
-  position: relative;
+  position: absolute;
   margin: 10% auto;
   padding: 5px 20px 13px 20px;
   border-radius: 0px;
@@ -185,12 +192,12 @@ body {
   text-decoration: none;
 }
 
-.close:hover { color: #88b7b3; }
+.close:hover { color: #88b7b3; }*/
 
 /* Navigation Bar */
 
 .navbar-brand {
-  font-size: 30px !important;
+  font-size: 50px !important;
   font-family: "Montserrat", sans-serif !important;
   font-weight: 500 !important;
   color: #88b7b3;
@@ -236,7 +243,7 @@ body {
 .add_location {
   display: inline-block;
   margin-top: 20px;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 

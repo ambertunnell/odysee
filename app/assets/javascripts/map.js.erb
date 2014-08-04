@@ -290,26 +290,27 @@ $(function () {
 
         if (allDayLocations.length > 0) {
             for (var i = 0; i < allDayLocations.length; i++) {
+                if (allDayLocations[i].length > 0){
+                    start = new google.maps.LatLng(allDayLocations[i][0][0], allDayLocations[i][0][1]);
+                    end = new google.maps.LatLng(allDayLocations[i][allDayLocations[i].length - 1][0], allDayLocations[i][allDayLocations[i].length - 1][1]);
+                    waypts = [];
 
-                start = new google.maps.LatLng(allDayLocations[i][0][0], allDayLocations[i][0][1]);
-                end = new google.maps.LatLng(allDayLocations[i][allDayLocations[i].length - 1][0], allDayLocations[i][allDayLocations[i].length - 1][1]);
-                waypts = [];
+                    for (var j = 1; j < allDayLocations[i].length - 1; j++) {
+                        waypts.push({
+                            location: new google.maps.LatLng(allDayLocations[i][j][0], allDayLocations[i][j][1]),
+                            stopover: true
+                        });
+                    }
 
-                for (var j = 1; j < allDayLocations[i].length - 1; j++) {
-                    waypts.push({
-                        location: new google.maps.LatLng(allDayLocations[i][j][0], allDayLocations[i][j][1]),
-                        stopover: true
-                    });
-                }
-
-                var request = {
-                    origin: start,
-                    destination: end,
-                    waypoints: waypts,
-                    optimizeWaypoints: false,
-                    travelMode: google.maps.TravelMode.WALKING
-                };
-                requestArray.push(request);
+                    var request = {
+                        origin: start,
+                        destination: end,
+                        waypoints: waypts,
+                        optimizeWaypoints: false,
+                        travelMode: google.maps.TravelMode.WALKING
+                    };
+                    requestArray.push(request);
+                }  
             }
         }
 

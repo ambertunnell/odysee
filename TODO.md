@@ -1,31 +1,26 @@
-WE NEED TO DO THIS STUFF:
+Todo:
 
-1. Map Functionality
-  a. dont do initial ajax get request on page load
-  b. clear route (hide polyline)
+*Polylines:
+-array of line colors,
+-fix line styling,
+-make dots better
+-animate!!!
 
-  d. hardcode two routes to show at onces
-  e. make draw all routes button
+*Front-page
+-instruction boxes
 
+*Markers
+-add alert when trying to add more than 10 markers
 
+*Dropdown
+-have where it automatically selects added day
 
-3. Style
-  a. Bootstrap!
+*Navbar
+-make responsive
 
-****. MAP STYLE STUFF
+*Routes
+-draw all only includes so many routes
 
-  b. stylize polylines
-  c. add ANIMATIONs
-
-JACOB:
-  hardcode two routes to show at onces
-  make draw all routes button
-
-  **add marker to db and map
-  request all locations for day without showing markers
-  route them
-
-  NOTE, can only have 3 total points in a route. 8 way points.
-  flash message for that?
-
+*Green bar
+-styling
 

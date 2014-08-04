@@ -45,7 +45,6 @@ class DaysController < ApplicationController
     render json: {}
   end   
 
-
   private
 
   def day_params

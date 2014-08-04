@@ -489,6 +489,48 @@ $(function () {
         calcAllRoutes();
     }
 
+/////////////// Add a date ///////////////////
+    $("#new_day").submit(function(e){
+      e.preventDefault();
+      $(".add_day").find(".error").text("")
+      var day_id = $("#day_date").val();
+     
+      $.ajax({
+        type: "POST",
+        url: "/days",
+        data: {day: {date: day_id}},
+        success: function(response){
+          var options = $("option");
+          var unique  = true;
+
+          for (var i = 1; i < options.length; i++){
+            if ($(options[i]).val() == day_id){ unique = false; }
+          }
+
+          if (unique){
+            var date = $("#day_date").val();
+            $("#location_day_id").append("<option value=" + response.id + ">" + date + "</option>");
+           
+            var ddl = document.getElementById('location_day_id');
+      
+            for (var i=0; i<ddl.options.length; i++){
+                if (i=(ddl.options.length-1)){
+                    ddl.options[i].selected = true;
+                    break;
+                }
+            }
+
+            $("#day_date").val('');
+            removeAllRoutes();
+
+          }
+        },
+      error: function (request, status, error) {
+          $(".add_day").append("<div class=\"error\">That day has already been added.</div>");
+      }
+      })
+    });
+
     /////////Delete Day and its markers///////
     $(".delete_day").click(function (e) {
         e.preventDefault();
@@ -549,5 +591,47 @@ $(function () {
             }
         });
     });
+
+        /////////Delete All Days and markers///////
+    $(".delete_all_days").click(function (e) {
+        e.preventDefault();
+
+        function setAllMap(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+        setAllMap(null);
+        markers = [];
+
+        var options = document.getElementById('location_day_id').options;
+      
+        for (var i=1; i<options.length; i++ ){
+
+        var day_value = document.getElementById('location_day_id').options[i].value
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "/days/" + day_value,
+                    data: {
+                        day: {
+                            date: day_value
+                        }
+                    },
+                    success: function (response) {
+                        clearDropdown('location_day_id');
+                        resetRoute();
+                    }
+                });    
+            }
+    });
+
+   function clearDropdown(dropdownSelector){
+        var select = document.getElementById(dropdownSelector);
+        var length = select.options.length;
+        for (i = 1; i < length; i++) {
+          select.options[i] = null;
+        }
+   }
 
 });

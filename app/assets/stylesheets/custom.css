@@ -246,6 +246,11 @@ body {
   margin-left: 10px;
 }
 
+.errors {
+    margin-left: 15px;
+    font-weight: bold;
+    display: inline;
+}
 
 #location_name {
   height: 30px !important;

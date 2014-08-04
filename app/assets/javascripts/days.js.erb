@@ -18,10 +18,12 @@ $(function () {
 
           if (unique){
             $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>");
+            $("#day_date").val('');
           }
-          $("#day_date").val('');
-
-        }
+        },
+      error: function (request, status, error) {
+          $(".add_day").append("<div class=\"error\">That day has already been added.</div>");
+      }
       })
     });
 

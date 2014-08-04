@@ -17,7 +17,18 @@ $(function () {
           }
 
           if (unique){
-            $("#location_day_id").append("<option value=" + response.id + ">" + $("#day_date").val() + "</option>");
+            var date = $("#day_date").val();
+            $("#location_day_id").append("<option value=" + response.id + ">" + date + "</option>");
+           
+            var ddl = document.getElementById('location_day_id');
+      
+            for (var i=0; i<ddl.options.length; i++){
+                if (i=(ddl.options.length-1)){
+                    ddl.options[i].selected = true;
+                    break;
+                }
+            }
+
             $("#day_date").val('');
           }
         },

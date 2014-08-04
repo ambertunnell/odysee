@@ -1,22 +1,12 @@
 <% if logged_in? %>
 
 <div class="forms container">
-  <%= form_for @day, :html => {class: "add_day"} do |f| %>
+  <%= form_for @day, :html => {class: "add_day col-md-8"} do |f| %>
     <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>  
     <%= f.submit "Add Date", :class => "btn btn-sm" %> 
   <% end %>
 
-  <div style="height: 15px;"></div>
-
-  <%= form_for @location, :html => {class: "add_location"} do |f| %>
-    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
-    <%= f.text_field :name, :placeholder => "e.g. Central Park", :type => "search" %>
-    <%= f.submit "Add Location", :class => "btn btn-sm" %>
-  <% end %>
-
-<div style="height: 15px;"></div>
-
-      <div class="col-md-4 dropdown">
+      <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
           Options
           <span class="caret"></span>
@@ -34,6 +24,20 @@
           <li role="presentation"><a class="animate_all" role="menuitem" tabindex="-1" href="#">Draw All</a></li>
         </ul>
       </div>
+
+
+  <div style="height: 30px;"></div>
+
+<div form class="form-inline">
+  <%= form_for @location, :html => {class: "add_location"} do |f| %>
+    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
+    <%= f.text_field :name, :placeholder => "e.g. Central Park", :class => "form-control" %>
+    <%= f.submit "Add Location", :class => "btn btn-sm" %>
+  <% end %>
+</div>
+<div style="height: 15px;"></div>
+
+
 
 <!-- <div class="well">
   <button class="clear_day btn btn-default">Clear Day</button>

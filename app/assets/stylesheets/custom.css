@@ -235,10 +235,15 @@ body {
 
 .add_location {
   display: inline-block;
+  margin-top: 20px;
+  margin-left: 15px;
 }
 
-#location_day_id {
-  
+
+#location_name {
+  height: 30px !important;
+  width: 300px !important;
+
 }
 
 .add_date {
@@ -249,12 +254,16 @@ body {
 #day-date {
   position: relative;
   float: left;
+  margin-bottom: 30px;
 }
 
+.dropdown {
+  float: right;
+}
 
 /*awesome styling for search boxes*/
 
-input {
+/*input {
   outline: none;
 }
 input[type=search] {
@@ -273,6 +282,7 @@ input[type=search] {
   border: solid 1px #ccc;
   padding: 9px 10px 9px 32px;
   width: 200px;
+  height: 12px;
   
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
@@ -298,7 +308,7 @@ input:-moz-placeholder {
 input::-webkit-input-placeholder {
   color: #999;
 }
-
+*/
 /* Day Dropdown */
 select {
   background-color: #ededed;

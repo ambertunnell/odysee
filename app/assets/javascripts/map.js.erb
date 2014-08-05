@@ -526,7 +526,9 @@ $(function () {
           }
         },
       error: function (request, status, error) {
+        if (day_id !== "") {
           $(".add_day").append("<div class=\"error\">That day has already been added.</div>");
+         } 
       }
       })
     });

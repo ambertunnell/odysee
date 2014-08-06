@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse navbar-responsive-collapse"> 
       <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-            <li class="navname">Welcome, <strong><%= current_user.name %></strong>!</li>
+            <li class="navname"><%= link_to "Welcome, #{current_user.name}!", root_path %></li>
             <li>  <%= render "layouts/about" %> </li>
             <li><%= link_to 'LOG OUT', logout_path %></li>
           <% else %>

@@ -340,3 +340,20 @@ select {
   text-transform: uppercase;
 }
 
+/* Responsive Media queries */
+@media screen and (max-width: 1000px) {
+
+  .dropdown {
+    float: left;
+    margin: 15px;
+  }
+
+}
+
+/*@media screen and (max-width: 690px) {
+
+  .icon-bar {
+    background-color: white;
+  }
+}*/
+

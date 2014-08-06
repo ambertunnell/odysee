@@ -10,6 +10,7 @@ Todo:
 
 *Markers
 -add alert when trying to add more than 10 markers
+- make markers draggable
 
 *Navbar
 -make responsive

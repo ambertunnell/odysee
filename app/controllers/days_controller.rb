@@ -1,4 +1,5 @@
 class DaysController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -6,6 +7,8 @@ class DaysController < ApplicationController
     unless @user.days.find_by(date: params[:day][:date])
       @day = Day.create(day_params) 
       @user.days << @day
+
+      binding.pry
     end
    
     respond_to do |format|

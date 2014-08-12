@@ -1,8 +1,8 @@
-# Mapify
+# odysee
 
 ## Description
 
-Add a short description of your app.
+Rails app that creates maps of a user’s daily travels.
 
 ## Screenshots
 
@@ -15,7 +15,10 @@ like?
 
 ## Features
 
-Bullet point some of the key features of your app here.
++ Utilized the Google Maps and Google Places APIs to retrieve coordinates for locations and pinpoint addresses on a map
++ Developed a Ajax and jQuery-heavy front-end to dynamically update the site and create a single-page app
++ Implemented Facebook OAuth 2.0 to allow users to login through their Facebook account
++ Incorporated custom CSS and JavaScript and Bootstrap to create an aesthetically-pleasing user experience
 
 ## Usage
 
@@ -31,9 +34,9 @@ Any things in particular you'd like to see in pull requests?
 What features are you currently working on? Only mention things that you
 actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
 
-## Author
+## Authors
 
-Link to your blog, twitter, etc!
+Amber Tunnell, Jacob Barrieault, & Julia Taitz
 
 ## License
 

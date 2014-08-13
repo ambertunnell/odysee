@@ -244,7 +244,7 @@ $(function () {
 
         directionsDisplay = new google.maps.DirectionsRenderer({
             markerOptions: {
-                icon: "bicycle-wheel2.gif",
+                icon: "blackdot.gif",
                 visible: true
             },
             polylineOptions: {
@@ -332,7 +332,7 @@ $(function () {
             if (status == google.maps.DirectionsStatus.OK) {
                 renderArray[current] = new google.maps.DirectionsRenderer({
                     markerOptions: {
-                        icon: "bicycle-wheel2.gif",
+                        icon: "blackdot.gif",
                         visible: true
                     },
                     polylineOptions: {
@@ -373,7 +373,7 @@ $(function () {
         //     color += letters[Math.floor(Math.random() * 16)];
         // }
         // return color;
-        var colors = ["Blue", "BlueViolet", "Brown", "CornflowerBlue", "Crimson", "DarkGoldenRod", "DarkGreen", "DarkRed", "DarkSlateGray", "Indigo", "LightCoral", "MediumBlue", "MediumSeaGreen", "PaleVioletRed", "Tomato", "SlateGray", "SlateBlue"];
+        var colors = ["#0066CC", "#00CC99", "#00CCFF", "#666699","#996699", "#CC6699", "#FF99CC", "#99CCFF","#CC6666","#663366"];
         var randColor = colors[Math.floor(Math.random() * colors.length)];
         return randColor;
     }

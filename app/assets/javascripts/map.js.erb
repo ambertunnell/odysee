@@ -121,10 +121,13 @@ $(function () {
 
         ////// event listener for user adding location by clicking on map /////
         google.maps.event.addListener(map, 'click', function (event) {
-            var latitude = event.latLng.k;
-            var longitude = event.latLng.B;
-            var day_id = $('#location_day_id').val();
 
+            console.log(event);
+            var latitude = event.latLng.k;
+            var longitude = event.latLng.A;
+            var day_id = $('#location_day_id').val();
+            console.log(latitude);
+            console.log(longitude);
             
             addLocation(latitude, longitude, day_id, event);
 
@@ -189,7 +192,7 @@ $(function () {
 
                 var name = $("#location_name").val();
                 var latitude = results[0].geometry.location.k;
-                var longitude = results[0].geometry.location.B;
+                var longitude = results[0].geometry.location.A;
                 var day_id = $('#location_day_id').val();
 
                 //addLocation(latitude, longitude, day_id); //problem with 'event'
@@ -411,6 +414,7 @@ $(function () {
 
     /////////// Change day //////////////////
     $("#location_day_id").change(function () {
+        console.log("you changed days");
         resetRoute();
         removeAllRoutes();
         removeMarkers();

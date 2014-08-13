@@ -1,12 +1,31 @@
 <% if logged_in? %>
 
-<div class="forms container">
-  <%= form_for @day, :html => {class: "add_day col-md-8"} do |f| %>
-    <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>  
-    <%= f.submit "Add Date", :class => "btn btn-sm" %> 
-  <% end %>
+<div>
+  <div class="forms container">
+    <div class="box">
+      <div class="top-row">
+    <div>
+    <%= form_for @day, :html => {class: "add_day col-md-4"} do |f| %>
+      <%= f.text_field :date, :placeholder => "Choose a day.", :class => "datepicker" %>  
+      <%= f.submit "Add Date", :class => "btn btn-sm" %> 
+    <% end %>
+  </div>
 
-      <div class="dropdown">
+    <button type="button" class="animate_all btn btn-default">Draw All Routes</button>
+    </div> 
+    <button type="button" class="animate btn btn-default">Draw Today's Route</button>
+
+
+<div style='height: 50px'></div>
+  <div form class="form-inline">
+    <%= form_for @location, :html => {class: "add_location"} do |f| %>
+      <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
+      <%= f.text_field :name, :placeholder => "e.g. Central Park", :class => "form-control" %>
+      <%= f.submit "Add Location", :class => "btn btn-sm" %>
+    <% end %>
+
+
+      <div style="display:inline" class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
           Options
           <span class="caret"></span>
@@ -14,41 +33,17 @@
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
           <li role="presentation" class="dropdown-header">Day</li>
           <li role="presentation"><a class="clear_day" role="menuitem" tabindex="-1" href="#">Clear Locations</a></li>
-          <li role="presentation"><a  class="delete_day" role="menuitem" tabindex="-1" href="#">Delete Day</a></li>
+          <li role="presentation"><a class="clear_route" role="menuitem" tabindex="-1" href="#">Hide Today's Route</a></li>
+          <li role="presentation"><a  class="delete_day" role="menuitem" tabindex="-1" href="#">Delete Today</a></li>
           <li role="presentation" class="divider"></li>
           <li role="presentation" class="dropdown-header">All Days</li>
           <li role="presentation"><a  class="delete_all_days" role="menuitem" tabindex="-1" href="#">Delete All Days</a></li>
-          <li role="presentation" class="divider"></li>
-          <li role="presentation" class="dropdown-header">Day Route</li>
-          <li role="presentation"><a class="animate" role="menuitem" tabindex="-1" href="#">Draw Today</a></li>
-          <li role="presentation"><a class="clear_route" role="menuitem" tabindex="-1" href="#">Hide Today</a></li>
-          <li role="presentation" class="divider"></li>
-          <li role="presentation" class="dropdown-header">All Routes</li>
-          <li role="presentation"><a class="animate_all" role="menuitem" tabindex="-1" href="#">Draw All</a></li>
         </ul>
       </div>
-
-
-  <div style="height: 30px;"></div>
-
-<div form class="form-inline">
-  <%= form_for @location, :html => {class: "add_location"} do |f| %>
-    <%= f.collection_select :day_id, @days, :id, :date, {:prompt => "Select a day."} %>
-    <%= f.text_field :name, :placeholder => "e.g. Central Park", :class => "form-control" %>
-    <%= f.submit "Add Location", :class => "btn btn-sm" %>
-  <% end %>
 </div>
-<div style="height: 15px;"></div>
+  </div>
+</div>
 
-
-
-<!-- <div class="well">
-  <button class="clear_day btn btn-default">Clear Day</button>
-  <button class="delete_day btn btn-default">Delete Day</button>
-  <button class="animate btn btn-default">Draw Today</button>
-  <button class="clear_route btn btn-default">Hide Today</button>
-  <button class="animate_all btn btn-default">Draw All</button>
-</div> -->
 
 </div>
 

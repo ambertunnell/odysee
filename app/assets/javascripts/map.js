@@ -283,8 +283,6 @@ $(function () {
 
     function calcAllRoutes() {
         var start, end, waypts;
-        // var renderArray = [];
-        // var requestArray = [];
 
         renderArray  = [];
         requestArray = [];

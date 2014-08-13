@@ -8,6 +8,7 @@ Rails app that creates maps of a user’s daily travels.
 
 ![Alt text](/public/screenshot-main.png "Main Page")
 ![Alt text](/public/screenshot-map.png "Map Page")
+![Alt text](/public/screenshot-routes.png "All Routes")
 
 ## Features
 

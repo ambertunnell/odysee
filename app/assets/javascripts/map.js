@@ -367,15 +367,15 @@ $(function () {
 
     // Random Color Generator
     function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-        // var colors = ['#F7977A', '#F9AD81', '#FDC68A', '#FFF79A', '#C4DF9B', '#A2D39C', '#82CA9D', '#7BCDC8', '#6ECFF6', '#7EA7D8', '#8493CA', '#8882BE', '#A187BE', '#BC8DBF', '#F49AC2', '#F6989D', "#29AFD6", "#4A9586", "#DD75DD", "#E37795", " #2A5A8B", "#5A458B", "#85CDCD", "#EE7721"];
-        // var randColor = colors[Math.floor(Math.random() * colors.length)];
-        // return randColor;
+        // var letters = '0123456789ABCDEF'.split('');
+        // var color = '#';
+        // for (var i = 0; i < 6; i++) {
+        //     color += letters[Math.floor(Math.random() * 16)];
+        // }
+        // return color;
+        var colors = ["Blue", "BlueViolet", "Brown", "CornflowerBlue", "Crimson", "DarkGoldenRod", "DarkGreen", "DarkRed", "DarkSlateGray", "Indigo", "LightCoral", "MediumBlue", "MediumSeaGreen", "PaleVioletRed", "Tomato", "SlateGray", "SlateBlue"];
+        var randColor = colors[Math.floor(Math.random() * colors.length)];
+        return randColor;
     }
 
     ///// DRAW BUTTONS /////

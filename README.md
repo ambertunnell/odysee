@@ -6,12 +6,7 @@ Rails app that creates maps of a user’s daily travels.
 
 ## Screenshots
 
-Add some spiffy screenshots of your app here.
 
-## Background
-
-Why did you want to make this app? What was your development process
-like?
 
 ## Features
 
@@ -20,23 +15,17 @@ like?
 + Implemented Facebook OAuth 2.0 to allow users to login through their Facebook account
 + Incorporated custom CSS and JavaScript and Bootstrap to create an aesthetically-pleasing user experience
 
-## Usage
-
-How do users use your app?
-
-## Development/Contribution
-
-Explain how people can contribute to your app. How should they write tests?
-Any things in particular you'd like to see in pull requests?
 
 ## Future
 
-What features are you currently working on? Only mention things that you
-actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
++ Working on making routes animated.
++ Plan to add test coverage.
+
 
 ## Authors
 
-Amber Tunnell, Jacob Barrieault, & Julia Taitz
+[Amber Tunnell](https://github.com/ambertunnell), [Jacob Barrieault](https://github.com/jbarrieault), & [Julia Taitz](https://github.com/juliataitz)
+
 
 ## License
 

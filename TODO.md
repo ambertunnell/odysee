@@ -1,8 +1,6 @@
 Todo:
 
 *Polylines:
--fix line styling,
--make dots better
 -animate!!!
 
 *Front-page

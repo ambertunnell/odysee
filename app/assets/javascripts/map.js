@@ -350,6 +350,7 @@ $(function () {
     // call it remove or hide or clear?
     function removeAllRoutes(){
       if (renderArray != undefined){
+        console.log("HI!")
         // simply setting renderArray = null doesn't work        
         for(var i = 0; i < renderArray.length; i++){
           renderArray[i].setDirections( { routes: [] } ); 

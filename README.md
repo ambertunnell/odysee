@@ -21,6 +21,7 @@ Rails app that creates maps of a user’s daily travels.
 
 + Working on making routes animated.
 + Plan to add test coverage.
++ Considering integrating the Foursquare API to automatically add visited points to a user's map.
 
 
 ## Authors

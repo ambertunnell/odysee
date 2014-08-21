@@ -125,8 +125,10 @@ $(function () {
         google.maps.event.addListener(map, 'click', function (event) {
 
             console.log(event);
-            var latitude = event.latLng.k;
-            var longitude = event.latLng.A;
+            // var latitude = event.latLng.k;
+            // var longitude = event.latLng.A;
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();            
             var day_id = $('#location_day_id').val();
             
             addLocation(latitude, longitude, day_id, event);
@@ -191,8 +193,10 @@ $(function () {
                 var place = results[0];
 
                 var name = $("#location_name").val();
-                var latitude = results[0].geometry.location.k;
-                var longitude = results[0].geometry.location.A;
+                // var latitude = results[0].geometry.location.k;
+                // var longitude = results[0].geometry.location.A;
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
                 var day_id = $('#location_day_id').val();
 
                 //addLocation(latitude, longitude, day_id); //problem with 'event'
